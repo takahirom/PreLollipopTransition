@@ -6,10 +6,15 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.View;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 /**
  * Created by takam on 2015/03/26.
  */
 public class ScreenTransitionLauncher {
+    public static final String TEMP_IMAGE_FILE_NAME = "temp.png";
     private final Activity activity;
     private View fromView;
 
@@ -35,13 +40,12 @@ public class ScreenTransitionLauncher {
         return bitmap;
     }
 
-    public void startActivity(Intent intent) {
+    public void launch(Intent intent) {
         int[] screenLocation = new int[2];
         fromView.getLocationOnScreen(screenLocation);
         int orientation = activity.getResources().getConfiguration().orientation;
         intent.
                 putExtra(BuildConfig.APPLICATION_ID + ".orientation", orientation).
-                putExtra(BuildConfig.APPLICATION_ID + ".image", createViewBitmap(fromView)).
                 putExtra(BuildConfig.APPLICATION_ID + ".left", screenLocation[0]).
                 putExtra(BuildConfig.APPLICATION_ID + ".top", screenLocation[1]).
                 putExtra(BuildConfig.APPLICATION_ID + ".width", fromView.getWidth()).

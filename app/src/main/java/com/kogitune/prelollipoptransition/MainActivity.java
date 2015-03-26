@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, SubActivity.class);
-                ScreenTransitionLauncher.with(MainActivity.this).from(v).startActivity(intent);
+                ScreenTransitionLauncher.with(MainActivity.this).from(v).launch(intent);
             }
         });
     }

@@ -12,6 +12,7 @@ public class SubActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
+        ScreenTransition.with(this).fromIntent(getIntent()).to(findViewById(R.id.imageView)).start(savedInstanceState);
 
     }
 
