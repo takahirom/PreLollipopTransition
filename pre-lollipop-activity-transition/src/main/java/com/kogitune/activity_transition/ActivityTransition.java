@@ -12,13 +12,13 @@ import android.view.animation.DecelerateInterpolator;
  */
 public class ActivityTransition {
     private static final TimeInterpolator sDecelerator = new DecelerateInterpolator();
-    private int duration = 500;
+    private int duration = 1000;
     private View toView;
     private Intent fromIntent;
-    private int mLeftDelta;
-    private int mTopDelta;
-    private float mWidthScale;
-    private float mHeightScale;
+    private int leftDelta;
+    private int topDelta;
+    private float widthScale;
+    private float heightScale;
 
     public ActivityTransition(Intent intent) {
         this.fromIntent = intent;
@@ -55,11 +55,11 @@ public class ActivityTransition {
 
                     int[] screenLocation = new int[2];
                     toView.getLocationOnScreen(screenLocation);
-                    mLeftDelta = thumbnailLeft - screenLocation[0];
-                    mTopDelta = thumbnailTop - screenLocation[1];
+                    leftDelta = thumbnailLeft - screenLocation[0];
+                    topDelta = thumbnailTop - screenLocation[1];
 
-                    mWidthScale = (float) thumbnailWidth / toView.getWidth();
-                    mHeightScale = (float) thumbnailHeight / toView.getHeight();
+                    widthScale = (float) thumbnailWidth / toView.getWidth();
+                    heightScale = (float) thumbnailHeight / toView.getHeight();
 
                     runEnterAnimation();
 
@@ -72,10 +72,10 @@ public class ActivityTransition {
     private void runEnterAnimation() {
         toView.setPivotX(0);
         toView.setPivotY(0);
-        toView.setScaleX(mWidthScale);
-        toView.setScaleY(mHeightScale);
-        toView.setTranslationX(mLeftDelta);
-        toView.setTranslationY(mTopDelta);
+        toView.setScaleX(widthScale);
+        toView.setScaleY(heightScale);
+        toView.setTranslationX(leftDelta);
+        toView.setTranslationY(topDelta);
 
         toView.animate().setDuration(duration).
                 scaleX(1).scaleY(1).
