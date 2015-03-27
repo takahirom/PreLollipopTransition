@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.kogitune.activity_transition.ActivityTransition;
+
 
 public class SubActivity extends ActionBarActivity {
 
@@ -12,7 +14,7 @@ public class SubActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
-        ScreenTransition.with(this).fromIntent(getIntent()).to(findViewById(R.id.imageView)).start(savedInstanceState);
+        ActivityTransition.with(getIntent()).to(findViewById(R.id.imageView)).start(savedInstanceState);
 
     }
 

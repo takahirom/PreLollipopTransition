@@ -1,11 +1,13 @@
 package com.kogitune.prelollipoptransition;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.kogitune.activity_transition.ActivityTransitionLauncher;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, SubActivity.class);
-                ScreenTransitionLauncher.with(MainActivity.this).from(v).launch(intent);
+                ActivityTransitionLauncher.with(MainActivity.this).from(v).launch(intent);
             }
         });
     }

@@ -12,7 +12,7 @@
         android:id="@+id/imageView"
         android:layout_marginTop="400dp"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:src="@drawable/photo" />
 
