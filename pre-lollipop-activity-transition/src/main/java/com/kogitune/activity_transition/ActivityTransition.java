@@ -12,7 +12,7 @@ import android.view.animation.DecelerateInterpolator;
  */
 public class ActivityTransition {
     private static final TimeInterpolator sDecelerator = new DecelerateInterpolator();
-    private static final int ANIM_DURATION = 500;
+    private int duration = 500;
     private View toView;
     private Intent fromIntent;
     private int mLeftDelta;
@@ -31,6 +31,10 @@ public class ActivityTransition {
     public ActivityTransition to(View toView) {
         this.toView = toView;
         return this;
+    }
+
+    public void duration(int duration){
+        this.duration = duration;
     }
 
 
@@ -66,8 +70,6 @@ public class ActivityTransition {
     }
 
     private void runEnterAnimation() {
-        final long duration = (long) (ANIM_DURATION);
-
         toView.setPivotX(0);
         toView.setPivotY(0);
         toView.setScaleX(mWidthScale);

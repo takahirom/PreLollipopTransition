@@ -30,7 +30,8 @@ public class ActivityTransitionLauncher {
         intent.
                 putExtra(BuildConfig.APPLICATION_ID + ".left", screenLocation[0]).
                 putExtra(BuildConfig.APPLICATION_ID + ".top", screenLocation[1]).
-                putExtra(BuildConfig.APPLICATION_ID + ".width", fromView.getWidth());
+                putExtra(BuildConfig.APPLICATION_ID + ".width", fromView.getMeasuredWidth()).
+                putExtra(BuildConfig.APPLICATION_ID + ".height", fromView.getMeasuredHeight());
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);
     }
