@@ -8,7 +8,7 @@
     tools:context="com.kogitune.prelollipoptransition.SubActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/sub_imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitStart"
