@@ -1,6 +1,8 @@
 # PreLollipopTransition
 Simple tool which help you to activity transition for pre-Lollipop devices.
 
+![image](https://cloud.githubusercontent.com/assets/1386930/6871816/7e2a25f2-d4e8-11e4-966d-028014e79a5a.gif)
+
 ## Thanks
 Sample Photo
 Luke Ma
