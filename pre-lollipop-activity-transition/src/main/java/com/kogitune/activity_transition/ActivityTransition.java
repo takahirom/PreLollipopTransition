@@ -33,8 +33,9 @@ public class ActivityTransition {
         return this;
     }
 
-    public void duration(int duration){
+    public ActivityTransition duration(int duration){
         this.duration = duration;
+        return this;
     }
 
 
