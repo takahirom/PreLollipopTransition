@@ -81,11 +81,11 @@ public class ActivityTransition {
 
     private void setImageToView(String imageFilePath) {
         Bitmap bitmap;
-//        if ((bitmap = ActivityTransitionLauncher.bitmapCache.get()) == null)
+        if ((bitmap = ActivityTransitionLauncher.bitmapCache.get()) == null) {
             bitmap = BitmapFactory.decodeFile(imageFilePath);
-//        } else {
-//            ActivityTransitionLauncher.bitmapCache.clear();
-//        }
+        } else {
+            ActivityTransitionLauncher.bitmapCache.clear();
+        }
         if (toView instanceof ImageView){
             final ImageView toImageView = (ImageView)toView;
             toImageView.setImageBitmap(bitmap);
