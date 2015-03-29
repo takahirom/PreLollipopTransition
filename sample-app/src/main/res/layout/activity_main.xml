@@ -8,12 +8,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_marginTop="400dp"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/photo" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/photo" />
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="400dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/photo" />
+    </FrameLayout>
 </ScrollView>

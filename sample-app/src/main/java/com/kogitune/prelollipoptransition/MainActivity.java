@@ -1,6 +1,7 @@
 package com.kogitune.prelollipoptransition;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -21,6 +22,15 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, SubActivity.class);
                 ActivityTransitionLauncher.with(MainActivity.this).from(v).launch(intent);
+            }
+        });
+
+        findViewById(R.id.imageView2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(MainActivity.this, SubActivity2.class);
+                // set bitmap for animation
+                ActivityTransitionLauncher.with(MainActivity.this).image(BitmapFactory.decodeResource(getResources(), R.drawable.photo)).from(v).launch(intent);
             }
         });
     }
