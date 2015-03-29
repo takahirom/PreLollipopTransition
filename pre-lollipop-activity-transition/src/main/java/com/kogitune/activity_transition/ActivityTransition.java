@@ -81,7 +81,7 @@ public class ActivityTransition {
 
     private void setImageToView(String imageFilePath) {
         Bitmap bitmap;
-        if ((bitmap = ActivityTransitionLauncher.bitmapCache.get()) == null) {
+        if (ActivityTransitionLauncher.bitmapCache == null || (bitmap = ActivityTransitionLauncher.bitmapCache.get()) == null) {
             bitmap = BitmapFactory.decodeFile(imageFilePath);
         } else {
             ActivityTransitionLauncher.bitmapCache.clear();
