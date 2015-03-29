@@ -35,8 +35,8 @@ Sample Photo
 Luke Ma
 https://www.flickr.com/photos/lukema/12499338274/in/photostream/
 
-DevBytes: Window Animations
-https://www.youtube.com/watch?v=Ho8vk61lVIU
+DevBytes: Custom Activity Animations
+https://www.youtube.com/watch?v=CPxkoe2MraA
 
 ## License
 
