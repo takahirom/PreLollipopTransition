@@ -1,5 +1,5 @@
 # PreLollipopTransition
-Simple tool which help you to activity transition for pre-Lollipop devices.
+Simple tool which help you to implement activity transition for pre-Lollipop devices.
 
 ## Code
 Start Activity in first activity.
