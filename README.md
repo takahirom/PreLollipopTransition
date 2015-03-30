@@ -25,7 +25,20 @@ Receive intent in second activity.
     }
 ```
 
-
+If if you want the exit animation, you can do like this.
+```
+    private ExitActivityTransition exitTransition;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sub2);
+        exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
+    }
+    @Override
+    public void onBackPressed() {
+        exitTransition.exit(this);
+    }
+```
 
 ## Sample
 ![image](https://cloud.githubusercontent.com/assets/1386930/6871816/7e2a25f2-d4e8-11e4-966d-028014e79a5a.gif)
