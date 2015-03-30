@@ -17,15 +17,15 @@ import android.widget.ImageView;
  */
 public class ActivityTransition {
     private static final TimeInterpolator sDecelerator = new DecelerateInterpolator();
-    private int duration = 1000;
-    private View toView;
     private Intent fromIntent;
-    private int leftDelta;
-    private int topDelta;
-    private float widthScale;
-    private float heightScale;
+    int duration = 1000;
+    View toView;
+    int leftDelta;
+    int topDelta;
+    float widthScale;
+    float heightScale;
 
-    public ActivityTransition(Intent intent) {
+    private ActivityTransition(Intent intent) {
         this.fromIntent = intent;
     }
 
@@ -44,13 +44,13 @@ public class ActivityTransition {
     }
 
 
-    public void start(Bundle savedInstanceState) {
+    public ExitActivityTransition start(Bundle savedInstanceState) {
         final Bundle bundle = fromIntent.getExtras();
-        final int thumbnailTop =    bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_TOP);
-        final int thumbnailLeft =   bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_LEFT);
-        final int thumbnailWidth =  bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_WIDTH);
+        final int thumbnailTop = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_TOP);
+        final int thumbnailLeft = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_LEFT);
+        final int thumbnailWidth = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_WIDTH);
         final int thumbnailHeight = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_HEIGHT);
-        final String imageFilePath =  bundle.getString(ActivityTransitionLauncher.EXTRA_IMAGE_PATH);
+        final String imageFilePath = bundle.getString(ActivityTransitionLauncher.EXTRA_IMAGE_PATH);
         if (imageFilePath != null) {
             setImageToView(imageFilePath);
         }
@@ -77,6 +77,7 @@ public class ActivityTransition {
                 }
             });
         }
+        return new ExitActivityTransition(this);
     }
 
     private void setImageToView(String imageFilePath) {

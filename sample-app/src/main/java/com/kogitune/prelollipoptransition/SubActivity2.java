@@ -6,15 +6,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kogitune.activity_transition.ActivityTransition;
+import com.kogitune.activity_transition.ExitActivityTransition;
 
 
 public class SubActivity2 extends ActionBarActivity {
+
+    private ExitActivityTransition exitTransition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub2);
-        ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
+        exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
     }
 
 
@@ -38,5 +41,10 @@ public class SubActivity2 extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        exitTransition.exit(this);
     }
 }
