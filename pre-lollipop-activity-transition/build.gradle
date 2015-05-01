@@ -1,4 +1,15 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+    }
+}
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 21
@@ -20,4 +31,57 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+group = 'com.kogitune'
+version = '0.0.1'
+
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+
+def siteUrl = 'https://github.com/takahirom/PreLollipopTransition'
+def gitUrl = 'https://github.com/takahirom/PreLollipopTransition.git'
+bintray {
+    user = "takahirom"
+    if (file("key").exists()) {
+        key = file("key").text
+    }
+
+    configurations = ['archives'] //When uploading configuration files
+    publish = true
+    pkg {
+        repo = 'maven'
+        name = 'PreLollipopTransition'
+        desc = 'Simple tool which help you to implement activity transition for pre-Lollipop devices'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/takahirom/PreLollipopTransition/issues'
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'animation']
+        publicDownloadNumbers = true
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
