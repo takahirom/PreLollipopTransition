@@ -1,6 +1,7 @@
 package com.kogitune.activity_transition;
 
 import android.animation.TimeInterpolator;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,12 +46,14 @@ public class ActivityTransition {
 
 
     public ExitActivityTransition start(Bundle savedInstanceState) {
+        final Context context = toView.getContext();
+        final String appId = (String) BuildConfigUtils.getBuildConfigValue(context, "APPLICATION_ID");
         final Bundle bundle = fromIntent.getExtras();
-        final int thumbnailTop = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_TOP);
-        final int thumbnailLeft = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_LEFT);
-        final int thumbnailWidth = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_WIDTH);
-        final int thumbnailHeight = bundle.getInt(ActivityTransitionLauncher.EXTRA_IMAGE_HEIGHT);
-        final String imageFilePath = bundle.getString(ActivityTransitionLauncher.EXTRA_IMAGE_PATH);
+        final int thumbnailTop = bundle.getInt(appId + ActivityTransitionLauncher.EXTRA_IMAGE_TOP);
+        final int thumbnailLeft = bundle.getInt(appId + ActivityTransitionLauncher.EXTRA_IMAGE_LEFT);
+        final int thumbnailWidth = bundle.getInt(appId + ActivityTransitionLauncher.EXTRA_IMAGE_WIDTH);
+        final int thumbnailHeight = bundle.getInt(appId + ActivityTransitionLauncher.EXTRA_IMAGE_HEIGHT);
+        final String imageFilePath = bundle.getString(appId + ActivityTransitionLauncher.EXTRA_IMAGE_PATH);
         if (imageFilePath != null) {
             setImageToView(imageFilePath);
         }

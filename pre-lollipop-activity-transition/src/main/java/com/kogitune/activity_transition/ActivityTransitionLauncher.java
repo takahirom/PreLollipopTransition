@@ -19,11 +19,11 @@ import java.lang.ref.WeakReference;
 public class ActivityTransitionLauncher {
     private static final String TAG = "TransitionLauncher";
     private static final String TEMP_IMAGE_FILE_NAME = "activity_transition_image.png";
-    public static final String EXTRA_IMAGE_LEFT = BuildConfig.APPLICATION_ID + ".left";
-    public static final String EXTRA_IMAGE_TOP = BuildConfig.APPLICATION_ID + ".top";
-    public static final String EXTRA_IMAGE_WIDTH = BuildConfig.APPLICATION_ID + ".width";
-    public static final String EXTRA_IMAGE_HEIGHT = BuildConfig.APPLICATION_ID + ".height";
-    public static final String EXTRA_IMAGE_PATH = BuildConfig.APPLICATION_ID + ".imageFilePath";
+    public static final String EXTRA_IMAGE_LEFT = ".left";
+    public static final String EXTRA_IMAGE_TOP = ".top";
+    public static final String EXTRA_IMAGE_WIDTH = ".width";
+    public static final String EXTRA_IMAGE_HEIGHT = ".height";
+    public static final String EXTRA_IMAGE_PATH = ".imageFilePath";
 
     private final Activity activity;
     private View fromView;
@@ -48,6 +48,7 @@ public class ActivityTransitionLauncher {
         new File(activity.getFilesDir().getAbsolutePath() + "/activity_transition/").mkdirs();
         final File imageFile = new File(activity.getFilesDir().getAbsolutePath() + "/activity_transition/", ActivityTransitionLauncher.TEMP_IMAGE_FILE_NAME);
         this.imageFilePath = imageFile.getAbsolutePath();
+        final Boolean isDebug = (Boolean) BuildConfigUtils.getBuildConfigValue(activity, "DEBUG");
 
         BufferedOutputStream bos = null;
         try {
@@ -58,18 +59,18 @@ public class ActivityTransitionLauncher {
             bos = new BufferedOutputStream(new FileOutputStream(imageFile));
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
         } catch (FileNotFoundException e) {
-            if (BuildConfig.DEBUG) {
+            if (isDebug) {
                 Log.i(TAG, "file not found", e);
             }
         } catch (IOException e) {
-            if (BuildConfig.DEBUG) {
+            if (isDebug) {
                 Log.i(TAG, "can't create file", e);
             }
         } finally {
             try {
                 bos.close();
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) {
+                if (isDebug) {
                     //IOException, NullPointerException
                     Log.i(TAG, "fail save image", e);
                 }
@@ -83,13 +84,14 @@ public class ActivityTransitionLauncher {
     public void launch(Intent intent) {
         int[] screenLocation = new int[2];
         fromView.getLocationOnScreen(screenLocation);
+        final String appId = (String) BuildConfigUtils.getBuildConfigValue(activity, "APPLICATION_ID");
         intent.
-                putExtra(EXTRA_IMAGE_LEFT, screenLocation[0]).
-                putExtra(EXTRA_IMAGE_TOP, screenLocation[1]).
-                putExtra(EXTRA_IMAGE_WIDTH, fromView.getMeasuredWidth()).
-                putExtra(EXTRA_IMAGE_HEIGHT, fromView.getMeasuredHeight());
+                putExtra(appId + EXTRA_IMAGE_LEFT, screenLocation[0]).
+                putExtra(appId + EXTRA_IMAGE_TOP, screenLocation[1]).
+                putExtra(appId + EXTRA_IMAGE_WIDTH, fromView.getMeasuredWidth()).
+                putExtra(appId + EXTRA_IMAGE_HEIGHT, fromView.getMeasuredHeight());
         if (imageFilePath != null) {
-            intent.putExtra(EXTRA_IMAGE_PATH, imageFilePath);
+            intent.putExtra(appId + EXTRA_IMAGE_PATH, imageFilePath);
         }
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);
