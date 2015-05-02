@@ -1,6 +1,15 @@
 # PreLollipopTransition
 Simple tool which help you to implement activity transition for pre-Lollipop devices.
 
+## Download
+In your app build.gradle add
+
+```
+dependencies {
+    compile 'com.kogitune:pre-lollipop-activity-transition:0.0.1'
+}
+```
+
 ## Code
 Start Activity in first activity.
 
