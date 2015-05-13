@@ -1,7 +1,7 @@
 # PreLollipopTransition
 Simple tool which help you to implement activity transition for pre-Lollipop devices.
 
-![prelollipopanimation](https://cloud.githubusercontent.com/assets/1386930/7614022/1db52580-f9cf-11e4-8d2a-5b58fb9a0b0b.gif)
+![prelollipopanimation](https://cloud.githubusercontent.com/assets/1386930/7614211/53ca12d8-f9d0-11e4-8b98-b6d98272f67d.gif)
 
 ## Download
 In your app build.gradle add
