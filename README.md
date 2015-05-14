@@ -36,7 +36,7 @@ Receive intent in second activity.
     }
 ```
 
-If if you want the exit animation, you can do like this.
+If you want the exit animation, you can do like this.
 ```
     private ExitActivityTransition exitTransition;
     @Override
