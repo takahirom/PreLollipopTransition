@@ -18,6 +18,8 @@ public class StartFragment extends Fragment {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create view info bundle by view
+                // Set bundle to fragment
                 getFragmentManager().beginTransaction().replace(R.id.content, new EndFragment()).addToBackStack(null).commit();
             }
         });
