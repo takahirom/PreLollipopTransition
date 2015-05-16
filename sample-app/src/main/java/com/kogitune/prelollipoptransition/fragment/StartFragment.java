@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kogitune.activity_transition.core.Transition;
 import com.kogitune.prelollipoptransition.R;
 
 /**
@@ -19,8 +20,11 @@ public class StartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Create view info bundle by view
+                final Bundle transitionBundle = Transition.createTransitionBundle(view.getContext(), view, null);
                 // Set bundle to fragment
-                getFragmentManager().beginTransaction().replace(R.id.content, new EndFragment()).addToBackStack(null).commit();
+                final EndFragment fragment = new EndFragment();
+                fragment.setArguments(transitionBundle);
+                getFragmentManager().beginTransaction().replace(R.id.content, fragment).addToBackStack(null).commit();
             }
         });
         return v;

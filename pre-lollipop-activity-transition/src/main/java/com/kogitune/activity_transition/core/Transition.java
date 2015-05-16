@@ -145,4 +145,17 @@ public class Transition {
             }
         }
     }
+
+    public static void startExitAnimation(MoveData moveData, final Runnable endAction) {
+        View view = moveData.toView;
+        int duration = moveData.duration;
+        int leftDelta = moveData.leftDelta;
+        int topDelta = moveData.topDelta;
+        float widthScale = moveData.widthScale;
+        float heightScale = moveData.heightScale;
+        view.animate().setDuration(duration).
+                scaleX(widthScale).scaleY(heightScale).
+                translationX(leftDelta).translationY(topDelta);
+        view.postDelayed(endAction, duration);
+    }
 }
