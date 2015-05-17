@@ -8,7 +8,7 @@ In your app build.gradle add
 
 ```
 dependencies {
-    compile 'com.kogitune:pre-lollipop-activity-transition:0.0.1'
+    compile 'com.kogitune:pre-lollipop-activity-transition:1.0.0'
 }
 ```
 
