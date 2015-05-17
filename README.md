@@ -85,7 +85,7 @@ Start animation in second activity.
 ```
 
 ## Sample
-![image](https://cloud.githubusercontent.com/assets/1386930/6871816/7e2a25f2-d4e8-11e4-966d-028014e79a5a.gif)
+![image](https://cloud.githubusercontent.com/assets/1386930/7668974/019262a0-fc95-11e4-906a-84a2b744a12c.gif)
 
 ## Thanks
 Sample Photo
