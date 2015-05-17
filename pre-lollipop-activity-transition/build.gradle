@@ -34,7 +34,7 @@ dependencies {
 }
 
 group = 'com.kogitune'
-version = '0.0.1'
+version = '1.0.0'
 
 
 apply plugin: 'maven'
