@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -33,6 +34,18 @@ public class MainActivity extends ActionBarActivity {
                 ActivityTransitionLauncher.with(MainActivity.this).image(BitmapFactory.decodeResource(getResources(), R.drawable.photo)).from(v).launch(intent);
             }
         });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.support_content, new SupportStartFragment())
+                    .commit();
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.content, new com.kogitune.prelollipoptransition.fragment.StartFragment())
+                    .commit();
+
+        }
     }
 
 

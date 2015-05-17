@@ -8,9 +8,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
+
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="v4 support fragment" />
+
+        <FrameLayout
+            android:id="@+id/support_content"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp" />
+
+        <TextView
+            android:layout_marginTop="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fragment" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_marginTop="150dp"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:layout_marginTop="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="activity" />
 
         <ImageView
             android:id="@+id/imageView"
