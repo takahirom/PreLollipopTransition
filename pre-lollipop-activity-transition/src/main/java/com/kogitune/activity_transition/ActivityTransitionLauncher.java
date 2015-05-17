@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 
-import com.kogitune.activity_transition.core.Transition;
+import com.kogitune.activity_transition.core.TransitionBundleFactory;
 
 /**
  * Created by takam on 2015/03/26.
@@ -38,7 +38,7 @@ public class ActivityTransitionLauncher {
     }
 
     public void launch(Intent intent) {
-        final Bundle transitionBundle = Transition.createTransitionBundle(activity, fromView, bitmap);
+        final Bundle transitionBundle = TransitionBundleFactory.createTransitionBundle(activity, fromView, bitmap);
         intent.putExtras(transitionBundle);
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);

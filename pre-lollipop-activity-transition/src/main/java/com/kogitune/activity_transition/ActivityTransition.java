@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.kogitune.activity_transition.core.MoveData;
-import com.kogitune.activity_transition.core.Transition;
+import com.kogitune.activity_transition.core.TransitionAnimation;
 
 /**
  * Created by takam on 2015/03/26.
@@ -32,7 +32,7 @@ public class ActivityTransition {
         return this;
     }
 
-    public ActivityTransition duration(int duration){
+    public ActivityTransition duration(int duration) {
         this.duration = duration;
         return this;
     }
@@ -41,7 +41,7 @@ public class ActivityTransition {
     public ExitActivityTransition start(Bundle savedInstanceState) {
         final Context context = toView.getContext();
         final Bundle bundle = fromIntent.getExtras();
-        final MoveData moveData = Transition.startAnimation(context, toView, bundle, savedInstanceState, duration, sDecelerator);
+        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, sDecelerator);
         return new ExitActivityTransition(moveData);
     }
 

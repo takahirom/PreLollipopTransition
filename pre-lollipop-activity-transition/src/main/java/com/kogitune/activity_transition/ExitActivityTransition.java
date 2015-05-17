@@ -3,7 +3,7 @@ package com.kogitune.activity_transition;
 import android.app.Activity;
 
 import com.kogitune.activity_transition.core.MoveData;
-import com.kogitune.activity_transition.core.Transition;
+import com.kogitune.activity_transition.core.TransitionAnimation;
 
 /**
  * Created by takam on 2015/03/30.
@@ -17,7 +17,7 @@ public class ExitActivityTransition {
     }
 
     public void exit(final Activity activity) {
-        Transition.startExitAnimation(moveData, new Runnable() {
+        TransitionAnimation.startExitAnimation(moveData, new Runnable() {
             @Override
             public void run() {
                 activity.finish();

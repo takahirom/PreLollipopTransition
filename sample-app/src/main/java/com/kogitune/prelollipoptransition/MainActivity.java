@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
-import com.kogitune.prelollipoptransition.fragment.StartFragment;
+import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -38,8 +38,13 @@ public class MainActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.content, new StartFragment())
+                    .add(R.id.support_content, new SupportStartFragment())
                     .commit();
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.content, new com.kogitune.prelollipoptransition.fragment.StartFragment())
+                    .commit();
+
         }
     }
 

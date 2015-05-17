@@ -65,6 +65,7 @@ bintray {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:+'
 }
 
 task sourcesJar(type: Jar) {
