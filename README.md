@@ -1,5 +1,5 @@
 # PreLollipopTransition
-Simple tool which help you to implement activity transition for pre-Lollipop devices.
+Simple tool which help you to implement activity and fragment transition for pre-Lollipop devices.
 
 ![prelollipopanimation](https://cloud.githubusercontent.com/assets/1386930/7614211/53ca12d8-f9d0-11e4-8b98-b6d98272f67d.gif)
 
@@ -13,6 +13,7 @@ dependencies {
 ```
 
 ## Code
+### Actvity
 Start Activity in first activity.
 
 ```
@@ -48,6 +49,38 @@ If you want the exit animation, you can do like this.
     @Override
     public void onBackPressed() {
         exitTransition.exit(this);
+    }
+```
+
+### Fragment
+Start fragment transition in first activity.
+```
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.support_fragment_start, container, false);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final EndFragment toFragment = new EndFragment();
+                FragmentTransitionLauncher
+                        .with(view.getContext())
+                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+                getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
+            }
+        });
+        return v;
+    }
+```
+
+Start animation in second activity.
+```
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.support_fragment_end, container, false);
+        final ExitFragmentTransition exitFragmentTransition = FragmentTransition.with(this).to(v.findViewById(R.id.fragment_imageView)).start(savedInstanceState);
+        exitFragmentTransition.startExitListening();
+        return v;
     }
 ```
 
