@@ -3,7 +3,7 @@ package com.kogitune.prelollipoptransition;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +12,7 @@ import com.kogitune.activity_transition.ActivityTransitionLauncher;
 import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
