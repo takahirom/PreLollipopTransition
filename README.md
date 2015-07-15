@@ -53,7 +53,7 @@ If you want the exit animation, you can do like this.
 ```
 
 ### Fragment
-Start fragment transition in first activity.
+Start fragment transition in first fragment.
 ```
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
