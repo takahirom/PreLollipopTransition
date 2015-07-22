@@ -16,7 +16,7 @@ dependencies {
 ### Actvity
 Start Activity in first activity.
 
-```
+```java
 findViewById(R.id.imageView).setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -28,7 +28,7 @@ findViewById(R.id.imageView).setOnClickListener(new View.OnClickListener() {
 
 Receive intent in second activity.
 
-```
+```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,8 @@ Receive intent in second activity.
 ```
 
 If you want the exit animation, you can do like this.
-```
+
+```java
     private ExitActivityTransition exitTransition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,8 @@ If you want the exit animation, you can do like this.
 
 ### Fragment
 Start fragment transition in first fragment.
-```
+
+```java
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.support_fragment_start, container, false);
@@ -74,7 +76,7 @@ Start fragment transition in first fragment.
 ```
 
 Start animation in second fragment.
-```
+```java
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.support_fragment_end, container, false);
