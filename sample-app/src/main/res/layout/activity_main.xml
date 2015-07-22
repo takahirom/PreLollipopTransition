@@ -58,5 +58,12 @@
             android:layout_marginTop="400dp"
             android:adjustViewBounds="true"
             android:src="@drawable/photo" />
+
+        <Button
+            android:id="@+id/listViewExampleButton"
+            android:text="ListView example"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="500dp"
+            android:layout_height="wrap_content"/>
     </FrameLayout>
 </ScrollView>

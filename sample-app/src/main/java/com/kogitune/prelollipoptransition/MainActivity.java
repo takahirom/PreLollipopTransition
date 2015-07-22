@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
 import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
@@ -32,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
                 final Intent intent = new Intent(MainActivity.this, SubActivity2.class);
                 // set bitmap for animation
                 ActivityTransitionLauncher.with(MainActivity.this).image(BitmapFactory.decodeResource(getResources(), R.drawable.photo)).from(v).launch(intent);
+            }
+        });
+
+        findViewById(R.id.listViewExampleButton).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                startActivity(intent);
             }
         });
 
