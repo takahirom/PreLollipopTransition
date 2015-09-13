@@ -86,6 +86,18 @@ Start animation in second fragment.
     }
 ```
 
+If you want to pass argument to second fragment, you should use `Fragment#getArguments()` after call prepare().
+
+```java
+                final EndFragment toFragment = new EndFragment();
+                FragmentTransitionLauncher
+                        .with(view.getContext())
+                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+                toFragment.getArguments().putString("stringArgKey", "this is value");
+                getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
+```
+
 ## Sample
 ![image](https://cloud.githubusercontent.com/assets/1386930/7668974/019262a0-fc95-11e4-906a-84a2b744a12c.gif)
 
