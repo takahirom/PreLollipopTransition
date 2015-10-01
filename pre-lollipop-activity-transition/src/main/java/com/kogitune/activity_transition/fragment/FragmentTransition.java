@@ -14,11 +14,11 @@ import com.kogitune.activity_transition.core.TransitionAnimation;
  * Created by takam on 2015/03/26.
  */
 public class FragmentTransition {
-    private static final TimeInterpolator sDecelerator = new DecelerateInterpolator();
-    private android.support.v4.app.Fragment supportFragment;
-    private Fragment fragment;
+    private static TimeInterpolator interpolator;
     int duration = 1000;
     View toView;
+    private android.support.v4.app.Fragment supportFragment;
+    private Fragment fragment;
 
     private FragmentTransition(Fragment fragment) {
         this.fragment = fragment;
@@ -47,7 +47,15 @@ public class FragmentTransition {
     }
 
 
+    public FragmentTransition interpolator(TimeInterpolator interpolator) {
+        FragmentTransition.interpolator = interpolator;
+        return this;
+    }
+
     public ExitFragmentTransition start(Bundle savedInstanceState) {
+        if (interpolator == null) {
+            interpolator = new DecelerateInterpolator();
+        }
         final Context context = toView.getContext();
         final Bundle bundle;
         if (fragment == null) {
@@ -55,7 +63,7 @@ public class FragmentTransition {
         } else {
             bundle = fragment.getArguments();
         }
-        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, sDecelerator);
+        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator);
         if (fragment == null) {
             return new ExitFragmentTransition(supportFragment, moveData);
         }
