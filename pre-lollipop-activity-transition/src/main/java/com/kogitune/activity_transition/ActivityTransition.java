@@ -14,10 +14,10 @@ import com.kogitune.activity_transition.core.TransitionAnimation;
  * Created by takam on 2015/03/26.
  */
 public class ActivityTransition {
-    private static final TimeInterpolator sDecelerator = new DecelerateInterpolator();
-    private Intent fromIntent;
     int duration = 1000;
     View toView;
+    private TimeInterpolator interpolator;
+    private Intent fromIntent;
 
     private ActivityTransition(Intent intent) {
         this.fromIntent = intent;
@@ -37,11 +37,18 @@ public class ActivityTransition {
         return this;
     }
 
+    public ActivityTransition interpolator(TimeInterpolator interpolator) {
+        this.interpolator = interpolator;
+        return this;
+    }
 
     public ExitActivityTransition start(Bundle savedInstanceState) {
+        if (interpolator == null) {
+            interpolator = new DecelerateInterpolator();
+        }
         final Context context = toView.getContext();
         final Bundle bundle = fromIntent.getExtras();
-        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, sDecelerator);
+        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator);
         return new ExitActivityTransition(moveData);
     }
 
