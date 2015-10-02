@@ -2,6 +2,7 @@ package com.kogitune.prelollipoptransition.support_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,11 @@ public class SupportEndFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.support_fragment_end, container, false);
-        final ExitFragmentTransition exitFragmentTransition = FragmentTransition.with(this).to(v.findViewById(R.id.fragment_imageView)).start(savedInstanceState);
+        final ExitFragmentTransition exitFragmentTransition = FragmentTransition
+                .with(this)
+                .interpolator(new FastOutSlowInInterpolator())
+                .to(v.findViewById(R.id.fragment_imageView))
+                .start(savedInstanceState);
         exitFragmentTransition.startExitListening();
         return v;
     }
