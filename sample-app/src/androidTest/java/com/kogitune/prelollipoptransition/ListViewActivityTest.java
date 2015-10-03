@@ -6,7 +6,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
 import android.widget.ListView;
 
-import com.kogitune.prelollipoptransition.rule.EspressoTestRule;
 import com.squareup.spoon.Spoon;
 
 /**
@@ -22,7 +21,6 @@ public class ListViewActivityTest extends ActivityInstrumentationTestCase2<ListV
 
     @Override
     public void setUp() throws Exception {
-        EspressoTestRule.disableAllAnimations();
         super.setUp();
         instrumentation = getInstrumentation();
     }

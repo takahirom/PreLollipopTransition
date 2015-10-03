@@ -6,7 +6,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 
-import com.kogitune.prelollipoptransition.rule.EspressoTestRule;
 import com.squareup.spoon.Spoon;
 
 import junit.framework.Assert;
@@ -26,7 +25,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     @Override
     public void setUp() throws Exception {
-        EspressoTestRule.disableAllAnimations();
         super.setUp();
         instrumentation = getInstrumentation();
     }
