@@ -21,8 +21,9 @@ public class SupportEndFragment extends Fragment {
         final ExitFragmentTransition exitFragmentTransition = FragmentTransition
                 .with(this)
                 .interpolator(new FastOutSlowInInterpolator())
-                .to(v.findViewById(R.id.fragment_imageView))
+                .to(v.findViewById(R.id.fragment_imageview))
                 .start(savedInstanceState);
+
         exitFragmentTransition.startExitListening();
         return v;
     }
