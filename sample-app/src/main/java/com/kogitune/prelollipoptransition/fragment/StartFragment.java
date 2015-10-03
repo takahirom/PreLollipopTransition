@@ -16,15 +16,15 @@ import com.kogitune.prelollipoptransition.R;
 public class StartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.support_fragment_start, container, false);
-        v.setOnClickListener(new View.OnClickListener() {
+        View v = inflater.inflate(R.layout.fragment_start, container, false);
+        v.findViewById(R.id.fragment_start_imageview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final EndFragment toFragment = new EndFragment();
                 FragmentTransitionLauncher
                         .with(view.getContext())
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+                        .from(view.findViewById(R.id.fragment_start_imageview)).prepare(toFragment);
                 getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
             }
         });
