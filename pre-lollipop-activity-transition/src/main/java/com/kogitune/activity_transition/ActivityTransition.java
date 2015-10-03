@@ -14,8 +14,8 @@ import com.kogitune.activity_transition.core.TransitionAnimation;
  * Created by takam on 2015/03/26.
  */
 public class ActivityTransition {
-    int duration = 1000;
-    View toView;
+    private int duration = 1000;
+    private View toView;
     private TimeInterpolator interpolator;
     private Intent fromIntent;
 

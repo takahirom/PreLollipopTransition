@@ -15,8 +15,8 @@ import com.kogitune.activity_transition.core.TransitionAnimation;
  */
 public class FragmentTransition {
     private static TimeInterpolator interpolator;
-    int duration = 1000;
-    View toView;
+    private int duration = 1000;
+    private View toView;
     private android.support.v4.app.Fragment supportFragment;
     private Fragment fragment;
 
