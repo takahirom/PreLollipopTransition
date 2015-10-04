@@ -2,16 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:clipChildren="false"
     tools:context=".MainActivity">
 
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,21 +23,21 @@
             android:layout_height="150dp" />
 
         <TextView
-            android:layout_marginTop="150dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
             android:text="fragment" />
 
         <FrameLayout
             android:id="@+id/content"
-            android:layout_marginTop="150dp"
             android:layout_width="fill_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:layout_marginTop="150dp" />
 
         <TextView
-            android:layout_marginTop="300dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
             android:text="activity" />
 
         <ImageView
@@ -61,9 +60,9 @@
 
         <Button
             android:id="@+id/listViewExampleButton"
-            android:text="ListView example"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="500dp"
-            android:layout_height="wrap_content"/>
+            android:text="ListView example" />
     </FrameLayout>
 </ScrollView>

@@ -24,7 +24,7 @@ public class StartFragment extends Fragment {
                 FragmentTransitionLauncher
                         .with(view.getContext())
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+                        .from(view.findViewById(R.id.fragment_start_imageview)).prepare(toFragment);
                 getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
             }
         });

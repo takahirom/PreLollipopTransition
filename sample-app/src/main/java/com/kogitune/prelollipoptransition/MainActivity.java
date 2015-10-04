@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, SubActivity.class);
-                ActivityTransitionLauncher.with(MainActivity.this).from(v).launch(intent);
+                ActivityTransitionLauncher
+                        .with(MainActivity.this)
+                        .from(v)
+                        .launch(intent);
             }
         });
 
@@ -32,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, SubActivity2.class);
                 // set bitmap for animation
-                ActivityTransitionLauncher.with(MainActivity.this).image(BitmapFactory.decodeResource(getResources(), R.drawable.photo)).from(v).launch(intent);
+                ActivityTransitionLauncher
+                        .with(MainActivity.this)
+                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+                        .from(v)
+                        .launch(intent);
             }
         });
 

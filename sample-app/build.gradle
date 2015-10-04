@@ -1,7 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'spoon'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.2'
+    }
+}
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "21.1.2"
 
     defaultConfig {
@@ -10,6 +20,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -24,4 +35,24 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:support-v4:+'
+
+    // testing
+    androidTestCompile 'com.android.support.test:runner:0.3'
+    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.9'
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
+    androidTestCompile 'com.squareup:fest-android:1.0.7'
+}
+
+configurations {
+    androidTestCompile.exclude group: 'com.android.support', module: 'support-v4'
+    androidTestCompile.exclude group: 'com.android.support', module: 'recyclerview-v7'
+    androidTestCompile.exclude group: 'com.android.support', module: 'support-annotations'
+}
+
+spoon {
+    debug = true;
 }
