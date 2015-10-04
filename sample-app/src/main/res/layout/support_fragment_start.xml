@@ -4,13 +4,13 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/support_fragment_start_imageview"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/photo"
-        android:scaleType="fitStart" />
+        android:scaleType="fitStart"
+        android:src="@drawable/photo" />
 
 </RelativeLayout>

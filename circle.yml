@@ -1,0 +1,26 @@
+general:
+  artifacts:
+    - 'sample-app/build/spoon'
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter "android-23"
+    - echo y | android update sdk --no-ui --all --filter "extra-google-m2repository"
+    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+    - echo y | android update sdk --no-ui --all --filter "extra-android-support"
+test:
+  override:
+    # create sdcard image file
+    - mksdcard -l e 512M mysdcard.img
+    # start the emulator
+    - emulator -avd circleci-android22   -no-audio -no-window -sdcard mysdcard.img:
+        background: true
+        parallel: true
+    # wait for it to have booted
+    - ./gradlew assembleDebugAndroidTest -PdisablePreDex
+    - circle-android wait-for-boot
+    # wait a little longer, just in case :)
+    - sleep 30
+    # uninstall app
+    - adb uninstall com.kogitune.prelollipoptransition
+    # run tests against the emulator using spoon.
+    - ./gradlew spoonDebugAndroidTest -PdisablePreDex

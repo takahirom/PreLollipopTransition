@@ -16,11 +16,11 @@ public class SupportStartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.support_fragment_start, container, false);
-        v.setOnClickListener(new View.OnClickListener() {
+        v.findViewById(R.id.support_fragment_start_imageview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final SupportEndFragment toFragment = new SupportEndFragment();
-                FragmentTransitionLauncher.with(view.getContext()).from(view.findViewById(R.id.imageView)).prepare(toFragment);
+                FragmentTransitionLauncher.with(view.getContext()).from(view.findViewById(R.id.support_fragment_start_imageview)).prepare(toFragment);
                 getFragmentManager().beginTransaction().replace(R.id.support_content, toFragment).addToBackStack(null).commit();
             }
         });
