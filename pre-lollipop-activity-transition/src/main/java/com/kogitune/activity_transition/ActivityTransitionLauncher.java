@@ -37,9 +37,12 @@ public class ActivityTransitionLauncher {
         return this;
     }
 
+    public Bundle createBundle() {
+        return TransitionBundleFactory.createTransitionBundle(activity, fromView, bitmap);
+    }
+
     public void launch(Intent intent) {
-        final Bundle transitionBundle = TransitionBundleFactory.createTransitionBundle(activity, fromView, bitmap);
-        intent.putExtras(transitionBundle);
+        intent.putExtras(createBundle());
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);
     }
