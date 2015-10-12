@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
 import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (REQUEST_CODE == requestCode) {
             String resultExtra = data.getStringExtra(SubActivity2.EXTRA_RESULT);
-//            Toast.makeText(this, "onActivityResult:" + resultExtra, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "onActivityResult:" + resultExtra, Toast.LENGTH_SHORT).show();
         }
     }
 }
