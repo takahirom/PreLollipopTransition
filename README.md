@@ -40,7 +40,7 @@ Receive intent in second activity.
     }
 ```
 
-If you want the exit animation, you can do like this.
+#### If you want the exit animation, you can do like this.
 
 ```java
     private ExitActivityTransition exitTransition;
@@ -54,6 +54,19 @@ If you want the exit animation, you can do like this.
     public void onBackPressed() {
         exitTransition.exit(this);
     }
+```
+
+#### If you want to use `startActivityForResult`, you should do below.
+1. Use `createBundle()`.
+2. Put Extra to intent.
+3. Call overridePendingTransition after `startActivityForResult`.
+
+```
+    Bundle transitionBundle = ActivityTransitionLauncher.with(MainActivity.this).from(v).createBundle();
+    intent.putExtras(transitionBundle);
+    startActivityForResult(intent, REQUEST_CODE);
+    // you should prevent default activity transition animation
+    overridePendingTransition(0, 0);
 ```
 
 ### Fragment
