@@ -32,28 +32,28 @@ findViewById(R.id.imageView).setOnClickListener(new View.OnClickListener() {
 Receive intent in second activity.
 
 ```java
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub);
-        ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
-    }
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_sub);
+    ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
+}
 ```
 
 #### If you want the exit animation, you can do like this.
 
 ```java
-    private ExitActivityTransition exitTransition;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub2);
-        exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
-    }
-    @Override
-    public void onBackPressed() {
-        exitTransition.exit(this);
-    }
+private ExitActivityTransition exitTransition;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_sub2);
+    exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
+}
+@Override
+public void onBackPressed() {
+    exitTransition.exit(this);
+}
 ```
 
 #### If you want to use `startActivityForResult`, you should do below.
@@ -62,56 +62,56 @@ Receive intent in second activity.
 3. Call overridePendingTransition after `startActivityForResult`.
 
 ```
-    Bundle transitionBundle = ActivityTransitionLauncher.with(MainActivity.this).from(v).createBundle();
-    intent.putExtras(transitionBundle);
-    startActivityForResult(intent, REQUEST_CODE);
-    // you should prevent default activity transition animation
-    overridePendingTransition(0, 0);
+Bundle transitionBundle = ActivityTransitionLauncher.with(MainActivity.this).from(v).createBundle();
+intent.putExtras(transitionBundle);
+startActivityForResult(intent, REQUEST_CODE);
+// you should prevent default activity transition animation
+overridePendingTransition(0, 0);
 ```
 
 ### Fragment
 Start fragment transition in first fragment.
 
 ```java
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.support_fragment_start, container, false);
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final EndFragment toFragment = new EndFragment();
-                FragmentTransitionLauncher
-                        .with(view.getContext())
-                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
-                getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
-            }
-        });
-        return v;
-    }
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View v = inflater.inflate(R.layout.support_fragment_start, container, false);
+    v.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            final EndFragment toFragment = new EndFragment();
+            FragmentTransitionLauncher
+                    .with(view.getContext())
+                    .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+                    .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+            getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
+        }
+    });
+    return v;
+}
 ```
 
 Start animation in second fragment.
 ```java
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.support_fragment_end, container, false);
-        final ExitFragmentTransition exitFragmentTransition = FragmentTransition.with(this).to(v.findViewById(R.id.fragment_imageView)).start(savedInstanceState);
-        exitFragmentTransition.startExitListening();
-        return v;
-    }
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View v = inflater.inflate(R.layout.support_fragment_end, container, false);
+    final ExitFragmentTransition exitFragmentTransition = FragmentTransition.with(this).to(v.findViewById(R.id.fragment_imageView)).start(savedInstanceState);
+    exitFragmentTransition.startExitListening();
+    return v;
+}
 ```
 
 If you want to pass argument to second fragment, you should use `Fragment#getArguments()` after call prepare().
 
 ```java
-                final EndFragment toFragment = new EndFragment();
-                FragmentTransitionLauncher
-                        .with(view.getContext())
-                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
-                toFragment.getArguments().putString("stringArgKey", "this is value");
-                getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
+final EndFragment toFragment = new EndFragment();
+FragmentTransitionLauncher
+        .with(view.getContext())
+        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+toFragment.getArguments().putString("stringArgKey", "this is value");
+getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
 ```
 
 ## Sample
