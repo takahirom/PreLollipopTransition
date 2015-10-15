@@ -16,7 +16,7 @@ dependencies {
 ```
 
 ## Code
-### Actvity
+### Activity
 Start Activity in first activity.
 
 ```java
