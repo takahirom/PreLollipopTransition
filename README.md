@@ -61,7 +61,7 @@ public void onBackPressed() {
 2. Put Extra to intent.
 3. Call overridePendingTransition after `startActivityForResult`.
 
-```
+```java
 Bundle transitionBundle = ActivityTransitionLauncher.with(MainActivity.this).from(v).createBundle();
 intent.putExtras(transitionBundle);
 startActivityForResult(intent, REQUEST_CODE);
