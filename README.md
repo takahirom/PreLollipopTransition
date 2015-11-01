@@ -125,13 +125,6 @@ https://www.flickr.com/photos/lukema/12499338274/in/photostream/
 DevBytes: Custom Activity Animations
 https://www.youtube.com/watch?v=CPxkoe2MraA
 
-## Contribution
-1. Fork it ( http://github.com/takahirom/PreLollipopTransition/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
-
 ## License
 
 This project is released under the Apache License, Version 2.0.
