@@ -34,40 +34,49 @@ public class TransitionBundleFactory {
         return transitionData.getBundle();
     }
 
-    private static String saveImage(Context context, Bitmap bitmap) {
+    private static String saveImage(final Context context, final Bitmap bitmap) {
         final String imageSavePath = context.getFilesDir().getAbsolutePath() + "/activity_transition/";
         new File(imageSavePath).mkdirs();
         final File imageFile = new File(imageSavePath, TEMP_IMAGE_FILE_NAME);
         final String imageFilePath = imageFile.getAbsolutePath();
-        final Boolean isDebug = (Boolean) BuildConfigUtils.getBuildConfigValue(context, "DEBUG");
-
-        BufferedOutputStream bos = null;
-        try {
-            if (imageFile.exists()) {
-                imageFile.delete();
-            }
-            imageFile.createNewFile();
-            bos = new BufferedOutputStream(new FileOutputStream(imageFile));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
-        } catch (FileNotFoundException e) {
-            if (isDebug) {
-                Log.i(TAG, "file not found", e);
-            }
-        } catch (IOException e) {
-            if (isDebug) {
-                Log.i(TAG, "can't create file", e);
-            }
-        } finally {
-            try {
-                bos.close();
-            } catch (Exception e) {
-                if (isDebug) {
-                    //IOException, NullPointerException
-                    Log.i(TAG, "fail save image", e);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                TransitionAnimation.isImageFileReady = false;
+                Boolean isDebug = (Boolean) BuildConfigUtils.getBuildConfigValue(context, "DEBUG");
+                BufferedOutputStream bos = null;
+                try {
+                    if (imageFile.exists()) {
+                        imageFile.delete();
+                    }
+                    imageFile.createNewFile();
+                    bos = new BufferedOutputStream(new FileOutputStream(imageFile));
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+                } catch (FileNotFoundException e) {
+                    if (isDebug) {
+                        Log.i(TAG, "file not found", e);
+                    }
+                } catch (IOException e) {
+                    if (isDebug) {
+                        Log.i(TAG, "can't create file", e);
+                    }
+                } finally {
+                    try {
+                        bos.close();
+                    } catch (Exception e) {
+                        if (isDebug) {
+                            //IOException, NullPointerException
+                            Log.i(TAG, "fail save image", e);
+                        }
+                    }
+                    TransitionAnimation.isImageFileReady = true;
+                }
+                TransitionAnimation.bitmapCache = new WeakReference<Bitmap>(bitmap);
+                synchronized (TransitionAnimation.lock) {
+                    TransitionAnimation.lock.notify();
                 }
             }
-        }
-        TransitionAnimation.bitmapCache = new WeakReference<Bitmap>(bitmap);
+        }).start();
         return imageFilePath;
     }
 
