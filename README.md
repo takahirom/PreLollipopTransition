@@ -118,7 +118,6 @@ getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToB
 ![image](https://cloud.githubusercontent.com/assets/1386930/7668974/019262a0-fc95-11e4-906a-84a2b744a12c.gif)
 
 ## Contributors
----------------
 * [shiraji](http://www.github.com/shiraji)
 
 
