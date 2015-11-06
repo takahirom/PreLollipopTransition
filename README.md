@@ -9,7 +9,7 @@ Simple tool which help you to implement activity and fragment transition for pre
 ## Download
 In your app build.gradle add
 
-```
+```groovy
 dependencies {
     compile 'com.kogitune:pre-lollipop-activity-transition:1.1.0'
 }
