@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.activity_transition.core.TransitionAnimation;
 import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
 
 
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE);
                 // you should prevent default activity tansition animation
                 overridePendingTransition(0, 0);
+
+
+                // You should not implement code below. This code is only for test. (Delete bitmap cache.)
+                TransitionAnimation.bitmapCache.clear();
             }
         });
 

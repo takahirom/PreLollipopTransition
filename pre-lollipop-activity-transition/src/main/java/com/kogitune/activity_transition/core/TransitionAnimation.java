@@ -12,6 +12,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by takam on 2015/05/17.
@@ -23,7 +25,22 @@ public class TransitionAnimation {
     public static MoveData startAnimation(Context context, final View toView, Bundle transitionBundle, Bundle savedInstanceState, final int duration, final TimeInterpolator interpolator) {
         final TransitionData transitionData = new TransitionData(context, transitionBundle);
         if (transitionData.imageFilePath != null) {
-            setImageToView(toView, transitionData.imageFilePath);
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+            final BitmapReturnValue bitmapReturnValue = new BitmapReturnValue();
+            AsyncHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    bitmapReturnValue.bitmap = getBitmap(transitionData.imageFilePath);
+                    countDownLatch.countDown();
+                }
+            });
+            try {
+                if (countDownLatch.await(3, TimeUnit.SECONDS)) {
+                    setImageToView(toView, bitmapReturnValue.bitmap);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         final MoveData moveData = new MoveData();
         moveData.toView = toView;
@@ -54,7 +71,6 @@ public class TransitionAnimation {
         return moveData;
     }
 
-
     private static void runEnterAnimation(MoveData moveData, TimeInterpolator interpolator) {
         final View toView = moveData.toView;
         toView.setPivotX(0);
@@ -70,14 +86,7 @@ public class TransitionAnimation {
                 setInterpolator(interpolator);
     }
 
-    private static void setImageToView(View toView, String imageFilePath) {
-        Bitmap bitmap;
-        if (bitmapCache == null || (bitmap = bitmapCache.get()) == null) {
-            // Cant get bitmap by static field
-            bitmap = BitmapFactory.decodeFile(imageFilePath);
-        } else {
-            bitmapCache.clear();
-        }
+    private static void setImageToView(View toView, Bitmap bitmap) {
         if (toView instanceof ImageView) {
             final ImageView toImageView = (ImageView) toView;
             toImageView.setImageBitmap(bitmap);
@@ -88,6 +97,17 @@ public class TransitionAnimation {
                 toView.setBackgroundDrawable(new BitmapDrawable(toView.getResources(), bitmap));
             }
         }
+    }
+
+    private static Bitmap getBitmap(String imageFilePath) {
+        Bitmap bitmap;
+        if (bitmapCache == null || (bitmap = bitmapCache.get()) == null) {
+            // Cant get bitmap by static field
+            bitmap = BitmapFactory.decodeFile(imageFilePath);
+        } else {
+            bitmapCache.clear();
+        }
+        return bitmap;
     }
 
     public static void startExitAnimation(MoveData moveData, TimeInterpolator interpolator, final Runnable endAction) {
@@ -103,5 +123,9 @@ public class TransitionAnimation {
                 .setInterpolator(interpolator).
                 translationX(leftDelta).translationY(topDelta);
         view.postDelayed(endAction, duration);
+    }
+
+    private static class BitmapReturnValue {
+        public Bitmap bitmap;
     }
 }
