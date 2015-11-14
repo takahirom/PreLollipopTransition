@@ -18,7 +18,10 @@ import java.lang.ref.WeakReference;
  */
 public class TransitionAnimation {
     private static final String TAG = "Transition";
+    private static final int MAX_TIME_TO_WAIT = 3000;
+    public static final Object lock = new Object();
     public static WeakReference<Bitmap> bitmapCache;
+    public static boolean isImageFileReady = false;
 
     public static MoveData startAnimation(Context context, final View toView, Bundle transitionBundle, Bundle savedInstanceState, final int duration, final TimeInterpolator interpolator) {
         final TransitionData transitionData = new TransitionData(context, transitionBundle);
@@ -73,11 +76,23 @@ public class TransitionAnimation {
     private static void setImageToView(View toView, String imageFilePath) {
         Bitmap bitmap;
         if (bitmapCache == null || (bitmap = bitmapCache.get()) == null) {
+            synchronized (lock) {
+                while (!isImageFileReady) {
+                    try {
+                        lock.wait(MAX_TIME_TO_WAIT);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
             // Cant get bitmap by static field
             bitmap = BitmapFactory.decodeFile(imageFilePath);
         } else {
             bitmapCache.clear();
         }
+        setImageToView(toView, bitmap);
+    }
+
+    private static void setImageToView(View toView, Bitmap bitmap) {
         if (toView instanceof ImageView) {
             final ImageView toImageView = (ImageView) toView;
             toImageView.setImageBitmap(bitmap);
