@@ -26,6 +26,7 @@ public class TransitionBundleFactory {
         // Bitmap is Optional
         String imageFilePath = null;
         if (bitmap != null) {
+            TransitionAnimation.bitmapCache = new WeakReference<Bitmap>(bitmap);
             imageFilePath = saveImage(context, bitmap);
         }
         int[] screenLocation = new int[2];
@@ -71,7 +72,6 @@ public class TransitionBundleFactory {
                     }
                     TransitionAnimation.isImageFileReady = true;
                 }
-                TransitionAnimation.bitmapCache = new WeakReference<Bitmap>(bitmap);
                 synchronized (TransitionAnimation.lock) {
                     TransitionAnimation.lock.notify();
                 }
