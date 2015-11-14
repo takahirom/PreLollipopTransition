@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 
+import com.kogitune.activity_transition.core.TransitionAnimation;
 import com.squareup.spoon.Spoon;
 
 import junit.framework.Assert;
@@ -112,6 +113,47 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 assertTrue(imageView.performClick());
             }
         });
+
+
+        Activity activity = instrumentation.waitForMonitor(monitor);
+
+        // Verify new activity was shown.
+        ANDROID.assertThat(monitor).hasHits(1);
+        // Wait for animation
+        Thread.sleep(2000l);
+        Spoon.screenshot(activity, "sub_activity_shown");
+
+
+        // subactivity -> mainactivity
+        sendKeys(KeyEvent.KEYCODE_BACK);
+        // Wait for animation
+        Thread.sleep(2000l);
+
+        instrumentation.waitForIdleSync();
+        Spoon.screenshot(getActivity(), "main_activity_backed");
+    }
+
+    public void testClearCacheGoSubActivity2() throws InterruptedException {
+        Spoon.screenshot(getActivity(), "init");
+        Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(SubActivity2.class.getName(), null, false);
+
+        final ImageView imageView = (ImageView) getActivity().findViewById(R.id.imageView2);
+        instrumentation.waitForIdleSync();
+
+        instrumentation.runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                assertTrue(imageView.performClick());
+            }
+        });
+        instrumentation.runOnMainSync(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        // clear bitmapCache
+                        TransitionAnimation.bitmapCache.clear();
+                    }
+                });
 
 
         Activity activity = instrumentation.waitForMonitor(monitor);
