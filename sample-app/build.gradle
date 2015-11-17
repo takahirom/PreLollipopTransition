@@ -37,8 +37,8 @@ dependencies {
     compile project(":pre-lollipop-activity-transition")
 //    compile 'com.kogitune:pre-lollipop-activity-transition:1.2.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:+'
-    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:appcompat-v7:23.+'
+    compile 'com.android.support:support-v4:23.+'
 
     // testing
     androidTestCompile 'com.android.support.test:runner:0.3'
