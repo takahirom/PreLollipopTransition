@@ -17,6 +17,8 @@ allprojects {
         jcenter()
     }
 }
+// Improve CI build performance
+// http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.
 
 project.ext.preDexLibs = !project.hasProperty('disablePreDex')
 
