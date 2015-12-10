@@ -1,6 +1,7 @@
 # PreLollipopTransition
 
 ![build status](https://circleci.com/gh/takahirom/PreLollipopTransition/tree/master.svg?style=shield&circle-token=1759143e61c73eeca59280337c8c95ab9f8dbafb)  
+[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 
 Simple tool which help you to implement activity and fragment transition for pre-Lollipop devices.
 
