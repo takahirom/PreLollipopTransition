@@ -63,7 +63,7 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.9'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.3.1'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
     androidTestCompile 'com.squareup:fest-android:1.0.7'
 }
