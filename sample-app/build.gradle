@@ -23,7 +23,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.2'
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.4'
     }
 }
 
@@ -51,9 +51,6 @@ android {
 }
 
 dependencies {
-//    compile project(":pre-lollipop-activity-transition")
-    compile 'com.kogitune:pre-lollipop-activity-transition:1.3.0'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:support-v4:23.+'
 
