@@ -27,7 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.activitytransition.ActivityTransitionLauncher;
 
 public class ListViewActivity extends AppCompatActivity {
 

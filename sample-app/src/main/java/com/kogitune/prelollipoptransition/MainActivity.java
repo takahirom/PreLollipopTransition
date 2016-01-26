@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.activitytransition.ActivityTransitionLauncher;
 import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
 
 
