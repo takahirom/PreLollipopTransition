@@ -20,6 +20,8 @@ test:
     - circle-android wait-for-boot
     # wait a little longer, just in case :)
     - sleep 30
+    # confirm devices
+    - adb devices
     # uninstall app
     - adb uninstall com.kogitune.prelollipoptransition
     # run tests against the emulator using spoon.
