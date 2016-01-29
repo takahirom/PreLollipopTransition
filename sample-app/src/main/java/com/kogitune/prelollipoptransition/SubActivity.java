@@ -20,8 +20,8 @@ package com.kogitune.prelollipoptransition;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.kogitune.activity_transition.ActivityTransition;
-import com.kogitune.activity_transition.ExitActivityTransition;
+import com.kogitune.activitytransition.ActivityTransition;
+import com.kogitune.activitytransition.ExitActivityTransition;
 
 
 public class SubActivity extends AppCompatActivity {

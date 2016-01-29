@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kogitune.activity_transition.fragment.FragmentTransitionLauncher;
+import com.kogitune.activitytransition.fragment.FragmentTransitionLauncher;
 import com.kogitune.prelollipoptransition.R;
 
 public class SupportStartFragment extends Fragment {

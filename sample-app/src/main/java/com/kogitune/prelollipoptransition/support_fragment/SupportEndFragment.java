@@ -24,8 +24,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kogitune.activity_transition.fragment.ExitFragmentTransition;
-import com.kogitune.activity_transition.fragment.FragmentTransition;
+import com.kogitune.activitytransition.fragment.ExitFragmentTransition;
+import com.kogitune.activitytransition.fragment.FragmentTransition;
 import com.kogitune.prelollipoptransition.R;
 
 public class SupportEndFragment extends Fragment {

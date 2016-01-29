@@ -23,8 +23,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 
-import com.kogitune.activity_transition.ActivityTransition;
-import com.kogitune.activity_transition.ExitActivityTransition;
+import com.kogitune.activitytransition.ActivityTransition;
+import com.kogitune.activitytransition.ExitActivityTransition;
 
 
 public class SubActivity2 extends AppCompatActivity {
