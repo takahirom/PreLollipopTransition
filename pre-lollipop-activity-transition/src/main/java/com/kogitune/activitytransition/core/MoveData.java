@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.activity_transition.core;
+package com.kogitune.activitytransition.core;
 
 import android.view.View;
 

@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.prelollipoptransition.support_fragment;
+package com.kogitune.prelollipoptransition.supportfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

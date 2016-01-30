@@ -26,7 +26,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.kogitune.activitytransition.ActivityTransitionLauncher;
-import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
+import com.kogitune.prelollipoptransition.supportfragment.SupportStartFragment;
 
 
 public class MainActivity extends AppCompatActivity {

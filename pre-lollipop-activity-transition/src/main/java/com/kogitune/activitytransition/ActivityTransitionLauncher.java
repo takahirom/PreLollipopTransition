@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.activity_transition;
+package com.kogitune.activitytransition;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 
-import com.kogitune.activity_transition.core.TransitionBundleFactory;
+import com.kogitune.activitytransition.core.TransitionBundleFactory;
 
 public class ActivityTransitionLauncher {
     private static final String TAG = "TransitionLauncher";

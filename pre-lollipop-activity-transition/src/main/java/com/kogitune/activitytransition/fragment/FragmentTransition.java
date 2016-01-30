@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.activity_transition.fragment;
+package com.kogitune.activitytransition.fragment;
 
 import android.animation.TimeInterpolator;
 import android.app.Fragment;
@@ -24,8 +24,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.kogitune.activity_transition.core.MoveData;
-import com.kogitune.activity_transition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.MoveData;
+import com.kogitune.activitytransition.core.TransitionAnimation;
 
 public class FragmentTransition {
     private static TimeInterpolator interpolator;

@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.activity_transition;
+package com.kogitune.activitytransition;
 
 import android.animation.TimeInterpolator;
 import android.content.Context;
@@ -24,8 +24,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.kogitune.activity_transition.core.MoveData;
-import com.kogitune.activity_transition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.MoveData;
+import com.kogitune.activitytransition.core.TransitionAnimation;
 
 public class ActivityTransition {
     private int duration = 1000;
