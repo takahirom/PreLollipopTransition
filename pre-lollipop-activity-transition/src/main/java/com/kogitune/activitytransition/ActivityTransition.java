@@ -78,6 +78,7 @@ public class ActivityTransition {
             set.addTransition(new ChangeImageTransform());
             set.setInterpolator(interpolator);
             window.setSharedElementEnterTransition(set);
+            window.setSharedElementExitTransition(set);
             return new ExitActivityTransition(null);
         }
         final Context context = toView.getContext();
