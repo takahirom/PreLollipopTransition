@@ -20,7 +20,10 @@ package com.kogitune.activitytransition;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 
 import com.kogitune.activitytransition.core.TransitionBundleFactory;
@@ -29,6 +32,7 @@ public class ActivityTransitionLauncher {
     private static final String TAG = "TransitionLauncher";
 
     private final Activity activity;
+    private String fromViewName;
     private View fromView;
     private Bitmap bitmap;
 
@@ -41,8 +45,9 @@ public class ActivityTransitionLauncher {
         return new ActivityTransitionLauncher(activity);
     }
 
-    public ActivityTransitionLauncher from(View fromView) {
+    public ActivityTransitionLauncher from(View fromView, String name) {
         this.fromView = fromView;
+        this.fromViewName = name;
         return this;
     }
 
@@ -56,6 +61,11 @@ public class ActivityTransitionLauncher {
     }
 
     public void launch(Intent intent) {
+        if (Build.VERSION.SDK_INT >= 16) {
+            final Bundle options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, fromView, fromViewName).toBundle();
+            ActivityCompat.startActivity(activity, intent, options);
+            return;
+        }
         intent.putExtras(createBundle());
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);

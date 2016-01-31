@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 final Intent intent = new Intent(MainActivity.this, SubActivity.class);
                 ActivityTransitionLauncher
                         .with(MainActivity.this)
-                        .from(v)
+                        .from(v, "image")
                         .launch(intent);
             }
         });
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle transitionBundle = ActivityTransitionLauncher
                         .with(MainActivity.this)
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(v)
+                        .from(v, "image2")
                         .createBundle();
                 intent.putExtras(transitionBundle);
                 startActivityForResult(intent, REQUEST_CODE);

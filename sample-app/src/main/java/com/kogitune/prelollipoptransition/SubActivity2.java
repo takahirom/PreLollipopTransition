@@ -20,6 +20,7 @@ package com.kogitune.prelollipoptransition;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 
@@ -34,12 +35,13 @@ public class SubActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub2);
         Intent intent = getIntent();
         exitTransition = ActivityTransition
                 .with(intent)
-                .to(findViewById(R.id.sub_imageView))
+                .to(findViewById(R.id.sub_imageView), "image")
                 .interpolator(new BounceInterpolator())
                 .start(savedInstanceState);
     }

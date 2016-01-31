@@ -120,6 +120,9 @@ public class TransitionAnimation {
     }
 
     public static void startExitAnimation(MoveData moveData, TimeInterpolator interpolator, final Runnable endAction) {
+        if (Build.VERSION.SDK_INT > 21) {
+            return;
+        }
         View view = moveData.toView;
         int duration = moveData.duration;
         int leftDelta = moveData.leftDelta;
