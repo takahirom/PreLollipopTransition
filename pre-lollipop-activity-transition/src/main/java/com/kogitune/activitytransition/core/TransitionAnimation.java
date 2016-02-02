@@ -87,7 +87,7 @@ public class TransitionAnimation {
                 setInterpolator(interpolator);
     }
 
-    private static void setImageToView(View toView, String imageFilePath) {
+    public static void setImageToView(View toView, String imageFilePath) {
         Bitmap bitmap;
         if (bitmapCache == null || (bitmap = bitmapCache.get()) == null) {
             synchronized (lock) {

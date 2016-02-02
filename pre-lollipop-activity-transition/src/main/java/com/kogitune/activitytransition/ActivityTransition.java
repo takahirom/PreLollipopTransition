@@ -33,6 +33,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.kogitune.activitytransition.core.MoveData;
 import com.kogitune.activitytransition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.TransitionData;
 
 public class ActivityTransition {
     private int duration = 1000;
@@ -70,6 +71,7 @@ public class ActivityTransition {
             interpolator = new DecelerateInterpolator();
         }
 
+        final Bundle bundle = fromIntent.getExtras();
         if (Build.VERSION.SDK_INT >= 21) {
             ViewCompat.setTransitionName(toView, toViewName);
             final Window window = ((Activity) toView.getContext()).getWindow();
@@ -79,10 +81,13 @@ public class ActivityTransition {
             set.setInterpolator(interpolator);
             window.setSharedElementEnterTransition(set);
             window.setSharedElementReturnTransition(set);
+            final TransitionData transitionData = new TransitionData(toView.getContext(), bundle);
+            if (transitionData.imageFilePath != null) {
+                TransitionAnimation.setImageToView(toView, transitionData.imageFilePath);
+            }
             return new ExitActivityTransition(null);
         }
         final Context context = toView.getContext();
-        final Bundle bundle = fromIntent.getExtras();
         final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator);
 
         return new ExitActivityTransition(moveData);

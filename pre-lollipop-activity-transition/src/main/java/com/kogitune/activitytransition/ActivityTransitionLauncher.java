@@ -61,12 +61,13 @@ public class ActivityTransitionLauncher {
     }
 
     public void launch(Intent intent) {
+
+        intent.putExtras(createBundle());
         if (Build.VERSION.SDK_INT >= 16) {
             final Bundle options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, fromView, fromViewName).toBundle();
             ActivityCompat.startActivity(activity, intent, options);
             return;
         }
-        intent.putExtras(createBundle());
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);
     }
