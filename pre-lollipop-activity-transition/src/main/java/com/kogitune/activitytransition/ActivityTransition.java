@@ -73,18 +73,21 @@ public class ActivityTransition {
 
         final Bundle bundle = fromIntent.getExtras();
         if (Build.VERSION.SDK_INT >= 21) {
+            final TransitionData transitionData = new TransitionData(toView.getContext(), bundle);
+            if (transitionData.imageFilePath != null) {
+                TransitionAnimation.setImageToView(toView, transitionData.imageFilePath);
+            }
+
             ViewCompat.setTransitionName(toView, toViewName);
             final Window window = ((Activity) toView.getContext()).getWindow();
             TransitionSet set = new TransitionSet();
             set.addTransition(new ChangeBounds());
             set.addTransition(new ChangeImageTransform());
             set.setInterpolator(interpolator);
+
             window.setSharedElementEnterTransition(set);
             window.setSharedElementReturnTransition(set);
-            final TransitionData transitionData = new TransitionData(toView.getContext(), bundle);
-            if (transitionData.imageFilePath != null) {
-                TransitionAnimation.setImageToView(toView, transitionData.imageFilePath);
-            }
+
             return new ExitActivityTransition(null);
         }
         final Context context = toView.getContext();
