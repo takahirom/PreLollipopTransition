@@ -60,12 +60,15 @@ public class ActivityTransitionLauncher {
         return TransitionBundleFactory.createTransitionBundle(activity, fromView, bitmap);
     }
 
+    public Bundle createOptions() {
+        return ActivityOptionsCompat.makeSceneTransitionAnimation(activity, fromView, fromViewName).toBundle();
+    }
+
     public void launch(Intent intent) {
 
         intent.putExtras(createBundle());
         if (Build.VERSION.SDK_INT >= 16) {
-            final Bundle options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, fromView, fromViewName).toBundle();
-            ActivityCompat.startActivity(activity, intent, options);
+            ActivityCompat.startActivity(activity, intent, createOptions());
             return;
         }
         activity.startActivity(intent);
