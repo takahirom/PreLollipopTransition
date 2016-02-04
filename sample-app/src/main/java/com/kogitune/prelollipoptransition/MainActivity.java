@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 final ActivityTransitionLauncher activityTransitionLauncher = ActivityTransitionLauncher
                         .with(MainActivity.this)
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(v, "image2");
+                        .from(v, "image");
                 Bundle transitionBundle = activityTransitionLauncher.createBundle();
                 intent.putExtras(transitionBundle);
                 ActivityCompat.startActivityForResult(MainActivity.this, intent, REQUEST_CODE, activityTransitionLauncher.createOptions());
