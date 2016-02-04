@@ -20,6 +20,7 @@ package com.kogitune.prelollipoptransition;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
                 final Intent intent = new Intent(MainActivity.this, SubActivity2.class);
                 // set bitmap for animation
                 // use startActivityForResult
-                Bundle transitionBundle = ActivityTransitionLauncher
+                final ActivityTransitionLauncher activityTransitionLauncher = ActivityTransitionLauncher
                         .with(MainActivity.this)
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(v, "image2")
-                        .createBundle();
+                        .from(v, "image2");
+                Bundle transitionBundle = activityTransitionLauncher.createBundle();
                 intent.putExtras(transitionBundle);
-                startActivityForResult(intent, REQUEST_CODE);
+                ActivityCompat.startActivityForResult(MainActivity.this, intent, REQUEST_CODE, activityTransitionLauncher.createOptions());
                 // you should prevent default activity tansition animation
                 overridePendingTransition(0, 0);
             }
