@@ -38,8 +38,14 @@ public class StartFragment extends Fragment {
                 FragmentTransitionLauncher
                         .with(view.getContext())
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(view.findViewById(R.id.fragment_start_imageview)).prepare(toFragment);
-                getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
+                        .from(view.findViewById(R.id.fragment_start_imageview))
+                        .prepare(toFragment);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content, toFragment)
+                        .addToBackStack(null)
+                        .addSharedElement(view, "image")
+                        .commit();
             }
         });
         return v;
