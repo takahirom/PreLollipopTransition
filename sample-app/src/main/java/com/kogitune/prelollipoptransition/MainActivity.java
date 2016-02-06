@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle transitionBundle = activityTransitionLauncher.createBundle();
                 intent.putExtras(transitionBundle);
                 ActivityCompat.startActivityForResult(MainActivity.this, intent, REQUEST_CODE, activityTransitionLauncher.createOptions());
-                // you should prevent default activity tansition animation
+                // you should prevent default activity transition animation
                 overridePendingTransition(0, 0);
             }
         });
