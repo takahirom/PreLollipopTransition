@@ -18,7 +18,9 @@
 package com.kogitune.prelollipoptransition.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,12 +42,16 @@ public class StartFragment extends Fragment {
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
                         .from(view.findViewById(R.id.fragment_start_imageview))
                         .prepare(toFragment);
-                getFragmentManager()
+
+                final FragmentTransaction fragmentTransaction = getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content, toFragment)
-                        .addToBackStack(null)
-                        .addSharedElement(view, "image")
-                        .commit();
+                        .addToBackStack(null);
+                if (Build.VERSION.SDK_INT > 21) {
+                    fragmentTransaction
+                            .addSharedElement(view, "image")
+                }
+                fragmentTransaction.commit();
             }
         });
         return v;
