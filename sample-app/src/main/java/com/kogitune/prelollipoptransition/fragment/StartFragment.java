@@ -49,7 +49,7 @@ public class StartFragment extends Fragment {
                         .addToBackStack(null);
                 if (Build.VERSION.SDK_INT > 21) {
                     fragmentTransaction
-                            .addSharedElement(view, "image")
+                            .addSharedElement(view, "image");
                 }
                 fragmentTransaction.commit();
             }
