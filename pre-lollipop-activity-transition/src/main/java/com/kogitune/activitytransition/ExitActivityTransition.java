@@ -46,7 +46,7 @@ public class ExitActivityTransition {
         TransitionAnimation.startExitAnimation(moveData, interpolator, new Runnable() {
             @Override
             public void run() {
-                if (Build.VERSION.SDK_INT > 21) {
+                if (Build.VERSION.SDK_INT >= 21) {
                     activity.finishAfterTransition();
                     return;
                 }

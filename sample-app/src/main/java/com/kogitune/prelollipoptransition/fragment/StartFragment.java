@@ -47,7 +47,7 @@ public class StartFragment extends Fragment {
                         .beginTransaction()
                         .replace(R.id.content, toFragment)
                         .addToBackStack(null);
-                if (Build.VERSION.SDK_INT > 21) {
+                if (Build.VERSION.SDK_INT >= 21) {
                     fragmentTransaction
                             .addSharedElement(view, "image");
                 }

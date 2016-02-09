@@ -120,7 +120,7 @@ public class TransitionAnimation {
     }
 
     public static void startExitAnimation(MoveData moveData, TimeInterpolator interpolator, final Runnable endAction) {
-        if (Build.VERSION.SDK_INT > 21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             endAction.run();
             return;
         }
