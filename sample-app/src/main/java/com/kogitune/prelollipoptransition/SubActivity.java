@@ -17,6 +17,7 @@
 
 package com.kogitune.prelollipoptransition;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -31,7 +32,9 @@ public class SubActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
         exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView), "image").start(savedInstanceState);
