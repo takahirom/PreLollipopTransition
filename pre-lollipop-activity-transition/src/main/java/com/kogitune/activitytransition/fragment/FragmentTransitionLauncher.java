@@ -55,6 +55,10 @@ public class FragmentTransitionLauncher {
 
     public void prepare(Fragment toFragment) {
         final Bundle transitionBundle = TransitionBundleFactory.createTransitionBundle(context, fromView, bitmap);
+        if (Build.VERSION.SDK_INT >= 21) {
+            toFragment.setSharedElementEnterTransition(new ChangeBounds());
+            toFragment.setSharedElementReturnTransition(new ChangeBounds());
+        }
         toFragment.setArguments(transitionBundle);
     }
 
