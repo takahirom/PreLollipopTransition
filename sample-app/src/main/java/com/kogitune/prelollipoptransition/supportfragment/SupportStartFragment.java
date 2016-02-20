@@ -39,7 +39,7 @@ public class SupportStartFragment extends Fragment {
                         .beginTransaction()
                         .replace(R.id.support_content, toFragment)
                         .addToBackStack(null)
-                        .addSharedElement(view, "image")
+                        .addSharedElement(view, "support_fragment_image")
                         .commit();
             }
         });
