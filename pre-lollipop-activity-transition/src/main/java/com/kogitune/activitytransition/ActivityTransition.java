@@ -15,23 +15,32 @@
  *
  */
 
-package com.kogitune.activity_transition;
+package com.kogitune.activitytransition;
 
 import android.animation.TimeInterpolator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
+import android.transition.ChangeBounds;
+import android.transition.ChangeImageTransform;
+import android.transition.TransitionSet;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
 
-import com.kogitune.activity_transition.core.MoveData;
-import com.kogitune.activity_transition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.MoveData;
+import com.kogitune.activitytransition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.TransitionData;
 
 public class ActivityTransition {
     private int duration = 1000;
     private View toView;
     private TimeInterpolator interpolator;
     private Intent fromIntent;
+    private String toViewName;
 
     private ActivityTransition(Intent intent) {
         this.fromIntent = intent;
@@ -41,8 +50,9 @@ public class ActivityTransition {
         return new ActivityTransition(intent);
     }
 
-    public ActivityTransition to(View toView) {
+    public ActivityTransition to(View toView, String name) {
         this.toView = toView;
+        this.toViewName = name;
         return this;
     }
 
@@ -60,9 +70,29 @@ public class ActivityTransition {
         if (interpolator == null) {
             interpolator = new DecelerateInterpolator();
         }
-        final Context context = toView.getContext();
+
         final Bundle bundle = fromIntent.getExtras();
+        if (Build.VERSION.SDK_INT >= 21) {
+            final TransitionData transitionData = new TransitionData(toView.getContext(), bundle);
+            if (transitionData.imageFilePath != null) {
+                TransitionAnimation.setImageToView(toView, transitionData.imageFilePath);
+            }
+
+            ViewCompat.setTransitionName(toView, toViewName);
+            final Window window = ((Activity) toView.getContext()).getWindow();
+            TransitionSet set = new TransitionSet();
+            set.addTransition(new ChangeBounds());
+            set.addTransition(new ChangeImageTransform());
+            set.setInterpolator(interpolator);
+
+            window.setSharedElementEnterTransition(set);
+            window.setSharedElementReturnTransition(set);
+
+            return new ExitActivityTransition(null);
+        }
+        final Context context = toView.getContext();
         final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator);
+
         return new ExitActivityTransition(moveData);
     }
 

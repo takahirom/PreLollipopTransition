@@ -15,27 +15,37 @@
  *
  */
 
-package com.kogitune.prelollipoptransition.support_fragment;
+package com.kogitune.prelollipoptransition.supportfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kogitune.activity_transition.fragment.FragmentTransitionLauncher;
+import com.kogitune.activitytransition.fragment.FragmentTransitionLauncher;
 import com.kogitune.prelollipoptransition.R;
 
 public class SupportStartFragment extends Fragment {
+
+    public static final String TRANSITION_NAME = "support_fragment_image";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.support_fragment_start, container, false);
         v.findViewById(R.id.support_fragment_start_imageview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ViewCompat.setTransitionName(view, TRANSITION_NAME);
                 final SupportEndFragment toFragment = new SupportEndFragment();
-                FragmentTransitionLauncher.with(view.getContext()).from(view.findViewById(R.id.support_fragment_start_imageview)).prepare(toFragment);
-                getFragmentManager().beginTransaction().replace(R.id.support_content, toFragment).addToBackStack(null).commit();
+                FragmentTransitionLauncher.with(getActivity()).from(view.findViewById(R.id.support_fragment_start_imageview)).prepare(toFragment);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.support_content, toFragment)
+                        .addToBackStack(null)
+                        .addSharedElement(view, TRANSITION_NAME)
+                        .commit();
             }
         });
         return v;

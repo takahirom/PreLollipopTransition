@@ -15,12 +15,12 @@
  *
  */
 
-package com.kogitune.activity_transition.core;
+package com.kogitune.activitytransition.core;
 
 import android.content.Context;
 import android.os.Bundle;
 
-import com.kogitune.activity_transition.BuildConfigUtils;
+import com.kogitune.activitytransition.BuildConfigUtils;
 
 public class TransitionData {
     public static final String EXTRA_IMAGE_LEFT = ".left";

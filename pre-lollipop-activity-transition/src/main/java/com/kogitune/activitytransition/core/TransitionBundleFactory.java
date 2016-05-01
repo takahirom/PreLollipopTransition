@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.activity_transition.core;
+package com.kogitune.activitytransition.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,7 +23,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.kogitune.activity_transition.BuildConfigUtils;
+import com.kogitune.activitytransition.BuildConfigUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

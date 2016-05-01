@@ -15,7 +15,7 @@
  *
  */
 
-package com.kogitune.activity_transition.core;
+package com.kogitune.activitytransition.core;
 
 import android.animation.TimeInterpolator;
 import android.content.Context;
@@ -87,7 +87,7 @@ public class TransitionAnimation {
                 setInterpolator(interpolator);
     }
 
-    private static void setImageToView(View toView, String imageFilePath) {
+    public static void setImageToView(View toView, String imageFilePath) {
         Bitmap bitmap;
         if (bitmapCache == null || (bitmap = bitmapCache.get()) == null) {
             synchronized (lock) {
@@ -120,6 +120,10 @@ public class TransitionAnimation {
     }
 
     public static void startExitAnimation(MoveData moveData, TimeInterpolator interpolator, final Runnable endAction) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            endAction.run();
+            return;
+        }
         View view = moveData.toView;
         int duration = moveData.duration;
         int leftDelta = moveData.leftDelta;

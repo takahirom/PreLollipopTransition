@@ -23,7 +23,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 
-import com.kogitune.activity_transition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.TransitionAnimation;
 import com.squareup.spoon.Spoon;
 
 import junit.framework.Assert;

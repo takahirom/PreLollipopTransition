@@ -27,7 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.activitytransition.ActivityTransitionLauncher;
 
 public class ListViewActivity extends AppCompatActivity {
 
@@ -61,7 +61,7 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent intent = new Intent(ListViewActivity.this, SubActivity.class);
-                ActivityTransitionLauncher.with(ListViewActivity.this).from(view.findViewById(R.id.image)).launch(intent);
+                ActivityTransitionLauncher.with(ListViewActivity.this).from(view.findViewById(R.id.image), "image").launch(intent);
             }
         });
     }

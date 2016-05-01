@@ -19,14 +19,17 @@ package com.kogitune.prelollipoptransition;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Toast;
 
-import com.kogitune.activity_transition.ActivityTransitionLauncher;
-import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
+import com.kogitune.activitytransition.ActivityTransitionLauncher;
+import com.kogitune.prelollipoptransition.supportfragment.SupportStartFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 final Intent intent = new Intent(MainActivity.this, SubActivity.class);
                 ActivityTransitionLauncher
                         .with(MainActivity.this)
-                        .from(v)
+                        .from(v, "image")
                         .launch(intent);
             }
         });
@@ -55,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
                 final Intent intent = new Intent(MainActivity.this, SubActivity2.class);
                 // set bitmap for animation
                 // use startActivityForResult
-                Bundle transitionBundle = ActivityTransitionLauncher
+                final ActivityTransitionLauncher activityTransitionLauncher = ActivityTransitionLauncher
                         .with(MainActivity.this)
                         .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(v)
-                        .createBundle();
+                        .from(v, "image");
+                Bundle transitionBundle = activityTransitionLauncher.createBundle();
                 intent.putExtras(transitionBundle);
-                startActivityForResult(intent, REQUEST_CODE);
-                // you should prevent default activity tansition animation
+                ActivityCompat.startActivityForResult(MainActivity.this, intent, REQUEST_CODE, activityTransitionLauncher.createOptions());
+                // you should prevent default activity transition animation
                 overridePendingTransition(0, 0);
             }
         });

@@ -15,14 +15,15 @@
  *
  */
 
-package com.kogitune.activity_transition;
+package com.kogitune.activitytransition;
 
 import android.animation.TimeInterpolator;
 import android.app.Activity;
+import android.os.Build;
 import android.view.animation.DecelerateInterpolator;
 
-import com.kogitune.activity_transition.core.MoveData;
-import com.kogitune.activity_transition.core.TransitionAnimation;
+import com.kogitune.activitytransition.core.MoveData;
+import com.kogitune.activitytransition.core.TransitionAnimation;
 
 public class ExitActivityTransition {
     private final MoveData moveData;
@@ -45,6 +46,10 @@ public class ExitActivityTransition {
         TransitionAnimation.startExitAnimation(moveData, interpolator, new Runnable() {
             @Override
             public void run() {
+                if (Build.VERSION.SDK_INT >= 21) {
+                    activity.finishAfterTransition();
+                    return;
+                }
                 activity.finish();
                 activity.overridePendingTransition(0, 0);
             }
