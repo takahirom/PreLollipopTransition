@@ -1,6 +1,9 @@
 general:
   artifacts:
     - 'sample-app/build/spoon'
+machine:
+  java:
+    version: openjdk8
 dependencies:
   pre:
     - echo y | android update sdk --no-ui --all --filter "android-24"
