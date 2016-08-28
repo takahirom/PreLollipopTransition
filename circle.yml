@@ -3,7 +3,7 @@ general:
     - 'sample-app/build/spoon'
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter "android-23"
+    - echo y | android update sdk --no-ui --all --filter "android-24"
     - echo y | android update sdk --no-ui --all --filter "extra-google-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-android-support"
