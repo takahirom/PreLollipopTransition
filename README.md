@@ -11,7 +11,7 @@ In your app build.gradle add
 
 ```groovy
 dependencies {
-    compile 'com.kogitune:pre-lollipop-activity-transition:1.3.0'
+    compile 'com.kogitune:pre-lollipop-activity-transition:1.3.2'
 }
 ```
 
