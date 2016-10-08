@@ -18,13 +18,13 @@
 package com.kogitune.prelollipoptransition;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.kogitune.activity_transition.ActivityTransition;
 import com.kogitune.activity_transition.ExitActivityTransition;
-import com.kogitune.activity_transition.SimpleAnimatorListener;
 
 
 public class SubActivity extends AppCompatActivity {
@@ -37,7 +37,7 @@ public class SubActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub);
         exitTransition = ActivityTransition
                 .with(getIntent())
-                .enterListener(new SimpleAnimatorListener() {
+                .enterListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         Log.e("TAG", "onEnterAnimationEnd");
@@ -49,28 +49,18 @@ public class SubActivity extends AppCompatActivity {
                     }
                 })
                 .to(findViewById(R.id.sub_imageView))
-                .start(savedInstanceState)
-                .exitListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        Log.e("TAG", "onOutAnimationStart: ");
-                    }
+                .start(savedInstanceState);
+        exitTransition.exitListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.d("TAG", "onOutAnimationStart!!");
+            }
 
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        Log.e("TAG", "onOutAnimationEnd: ");
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.d("TAG", "onOutAnimationEnd!!");
+            }
+        });
     }
 
     @Override
