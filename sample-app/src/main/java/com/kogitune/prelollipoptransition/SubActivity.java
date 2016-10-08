@@ -17,8 +17,11 @@
 
 package com.kogitune.prelollipoptransition;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.kogitune.activity_transition.ActivityTransition;
 import com.kogitune.activity_transition.ExitActivityTransition;
@@ -32,7 +35,32 @@ public class SubActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
-        exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
+        exitTransition = ActivityTransition
+                .with(getIntent())
+                .enterListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.d("TAG", "onEnterAnimationEnd!!");
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        Log.d("TAG", "onOEnterAnimationStart!!");
+                    }
+                })
+                .to(findViewById(R.id.sub_imageView))
+                .start(savedInstanceState);
+        exitTransition.exitListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.d("TAG", "onOutAnimationStart!!");
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.d("TAG", "onOutAnimationEnd!!");
+            }
+        });
     }
 
     @Override

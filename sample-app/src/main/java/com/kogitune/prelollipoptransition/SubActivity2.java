@@ -17,14 +17,19 @@
 
 package com.kogitune.prelollipoptransition;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.kogitune.activity_transition.ActivityTransition;
 import com.kogitune.activity_transition.ExitActivityTransition;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class SubActivity2 extends AppCompatActivity {
@@ -41,7 +46,30 @@ public class SubActivity2 extends AppCompatActivity {
                 .with(intent)
                 .to(findViewById(R.id.sub_imageView))
                 .interpolator(new BounceInterpolator())
+                .enterListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        Log.d("TAG", "onEnterAnimationStart!! ");
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.d("TAG", "onEnterAnimationEnd!!");
+                    }
+
+                })
                 .start(savedInstanceState);
+        exitTransition.exitListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.d("TAG", "onExitAnimationEnd!!");
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.d("TAG", "onExitAnimationStart!!");
+            }
+        });
     }
 
     @Override

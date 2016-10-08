@@ -34,7 +34,10 @@ public class SupportStartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 final SupportEndFragment toFragment = new SupportEndFragment();
-                FragmentTransitionLauncher.with(view.getContext()).from(view.findViewById(R.id.support_fragment_start_imageview)).prepare(toFragment);
+                FragmentTransitionLauncher
+                        .with(view.getContext())
+                        .from(view.findViewById(R.id.support_fragment_start_imageview))
+                        .prepare(toFragment);
                 getFragmentManager().beginTransaction().replace(R.id.support_content, toFragment).addToBackStack(null).commit();
             }
         });

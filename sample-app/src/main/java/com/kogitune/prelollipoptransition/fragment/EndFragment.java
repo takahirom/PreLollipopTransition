@@ -17,8 +17,11 @@
 
 package com.kogitune.prelollipoptransition.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +34,21 @@ public class EndFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_end, container, false);
-        final ExitFragmentTransition exitFragmentTransition = FragmentTransition.with(this).to(v.findViewById(R.id.fragment_imageView)).start(savedInstanceState);
+        final ExitFragmentTransition exitFragmentTransition
+                = FragmentTransition
+                .with(this)
+                .to(v.findViewById(R.id.fragment_imageView))
+                .start(savedInstanceState);
+        exitFragmentTransition.exitListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.d("TAG", "onAnimationStart: ");
+            }
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.d("TAG", "onAnimationEnd: ");
+            }
+        });
         exitFragmentTransition.startExitListening();
         return v;
     }
