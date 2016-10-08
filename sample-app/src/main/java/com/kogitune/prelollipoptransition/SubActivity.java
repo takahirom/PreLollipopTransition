@@ -40,12 +40,12 @@ public class SubActivity extends AppCompatActivity {
                 .enterListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        Log.e("TAG", "onEnterAnimationEnd");
+                        Log.d("TAG", "onEnterAnimationEnd!!");
                     }
 
                     @Override
                     public void onAnimationStart(Animator animation) {
-                        Log.e("TAG", "onOEnterAnimationStart ");
+                        Log.d("TAG", "onOEnterAnimationStart!!");
                     }
                 })
                 .to(findViewById(R.id.sub_imageView))
