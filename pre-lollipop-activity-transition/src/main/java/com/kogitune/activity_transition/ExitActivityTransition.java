@@ -17,6 +17,7 @@
 
 package com.kogitune.activity_transition;
 
+import android.animation.Animator;
 import android.animation.TimeInterpolator;
 import android.app.Activity;
 import android.view.animation.DecelerateInterpolator;
@@ -27,6 +28,7 @@ import com.kogitune.activity_transition.core.TransitionAnimation;
 public class ExitActivityTransition {
     private final MoveData moveData;
     private TimeInterpolator interpolator;
+    private Animator.AnimatorListener listener;
 
 
     public ExitActivityTransition(MoveData moveData) {
@@ -35,6 +37,10 @@ public class ExitActivityTransition {
 
     public ExitActivityTransition interpolator(TimeInterpolator interpolator) {
         this.interpolator = interpolator;
+        return this;
+    }
+    public ExitActivityTransition exitListener(Animator.AnimatorListener listener) {
+        this.listener = listener;
         return this;
     }
 
@@ -48,7 +54,7 @@ public class ExitActivityTransition {
                 activity.finish();
                 activity.overridePendingTransition(0, 0);
             }
-        });
+        },listener);
     }
 
 }

@@ -17,6 +17,7 @@
 
 package com.kogitune.activity_transition.fragment;
 
+import android.animation.Animator;
 import android.animation.TimeInterpolator;
 import android.app.Fragment;
 import android.content.Context;
@@ -29,6 +30,7 @@ import com.kogitune.activity_transition.core.TransitionAnimation;
 
 public class FragmentTransition {
     private static TimeInterpolator interpolator;
+    private Animator.AnimatorListener listener;
     private int duration = 1000;
     private View toView;
     private android.support.v4.app.Fragment supportFragment;
@@ -59,6 +61,10 @@ public class FragmentTransition {
         this.duration = duration;
         return this;
     }
+    public FragmentTransition enterListener(Animator.AnimatorListener listener) {
+        this.listener = listener;
+        return this;
+    }
 
 
     public FragmentTransition interpolator(TimeInterpolator interpolator) {
@@ -77,7 +83,7 @@ public class FragmentTransition {
         } else {
             bundle = fragment.getArguments();
         }
-        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator);
+        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator,listener);
         if (fragment == null) {
             return new ExitFragmentTransition(supportFragment, moveData);
         }

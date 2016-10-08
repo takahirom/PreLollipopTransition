@@ -17,11 +17,14 @@
 
 package com.kogitune.prelollipoptransition;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.kogitune.activity_transition.ActivityTransition;
 import com.kogitune.activity_transition.ExitActivityTransition;
+import com.kogitune.activity_transition.SimpleAnimatorListener;
 
 
 public class SubActivity extends AppCompatActivity {
@@ -32,7 +35,42 @@ public class SubActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
-        exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.sub_imageView)).start(savedInstanceState);
+        exitTransition = ActivityTransition
+                .with(getIntent())
+                .enterListener(new SimpleAnimatorListener() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.e("TAG", "onEnterAnimationEnd");
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        Log.e("TAG", "onOEnterAnimationStart ");
+                    }
+                })
+                .to(findViewById(R.id.sub_imageView))
+                .start(savedInstanceState)
+                .exitListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        Log.e("TAG", "onOutAnimationStart: ");
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.e("TAG", "onOutAnimationEnd: ");
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
     }
 
     @Override
