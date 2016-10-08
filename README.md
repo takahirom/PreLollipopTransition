@@ -11,9 +11,11 @@ In your app build.gradle add
 
 ```groovy
 dependencies {
-    compile 'com.kogitune:pre-lollipop-activity-transition:1.3.2'
+    compile 'com.kogitune:pre-lollipop-activity-transition:1.x.x'
 }
 ```
+
+[ ![Download](https://api.bintray.com/packages/takahirom/maven/PreLollipopTransition/images/download.svg) ](https://bintray.com/takahirom/maven/PreLollipopTransition/_latestVersion)
 
 ## Code
 ### Activity
