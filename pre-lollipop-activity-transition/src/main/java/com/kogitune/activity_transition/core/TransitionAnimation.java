@@ -17,7 +17,9 @@
 
 package com.kogitune.activity_transition.core;
 
+import android.animation.Animator;
 import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,7 +39,7 @@ public class TransitionAnimation {
     public static WeakReference<Bitmap> bitmapCache;
     public static boolean isImageFileReady = false;
 
-    public static MoveData startAnimation(Context context, final View toView, Bundle transitionBundle, Bundle savedInstanceState, final int duration, final TimeInterpolator interpolator) {
+    public static MoveData startAnimation(Context context, final View toView, Bundle transitionBundle, Bundle savedInstanceState, final int duration, final TimeInterpolator interpolator, final Animator.AnimatorListener listener) {
         final TransitionData transitionData = new TransitionData(context, transitionBundle);
         if (transitionData.imageFilePath != null) {
             setImageToView(toView, transitionData.imageFilePath);
@@ -61,9 +63,7 @@ public class TransitionAnimation {
 
                     moveData.widthScale = (float) transitionData.thumbnailWidth / toView.getWidth();
                     moveData.heightScale = (float) transitionData.thumbnailHeight / toView.getHeight();
-
-                    runEnterAnimation(moveData, interpolator);
-
+                    runEnterAnimation(moveData, interpolator, listener);
                     return true;
                 }
             });
@@ -72,7 +72,7 @@ public class TransitionAnimation {
     }
 
 
-    private static void runEnterAnimation(MoveData moveData, TimeInterpolator interpolator) {
+    private static void runEnterAnimation(MoveData moveData, TimeInterpolator interpolator, Animator.AnimatorListener listener) {
         final View toView = moveData.toView;
         toView.setPivotX(0);
         toView.setPivotY(0);
@@ -81,10 +81,14 @@ public class TransitionAnimation {
         toView.setTranslationX(moveData.leftDelta);
         toView.setTranslationY(moveData.topDelta);
 
-        toView.animate().setDuration(moveData.duration).
-                scaleX(1).scaleY(1).
-                translationX(0).translationY(0).
-                setInterpolator(interpolator);
+        toView.animate()
+                .setDuration(moveData.duration)
+                .scaleX(1)
+                .scaleY(1)
+                .translationX(0)
+                .translationY(0)
+                .setListener(listener)
+                .setInterpolator(interpolator);
     }
 
     private static void setImageToView(View toView, String imageFilePath) {
@@ -119,7 +123,7 @@ public class TransitionAnimation {
         }
     }
 
-    public static void startExitAnimation(MoveData moveData, TimeInterpolator interpolator, final Runnable endAction) {
+    public static void startExitAnimation(MoveData moveData, TimeInterpolator interpolator, final Runnable endAction, Animator.AnimatorListener listener) {
         View view = moveData.toView;
         int duration = moveData.duration;
         int leftDelta = moveData.leftDelta;
@@ -129,8 +133,10 @@ public class TransitionAnimation {
         view.animate()
                 .setDuration(duration)
                 .scaleX(widthScale).scaleY(heightScale)
-                .setInterpolator(interpolator).
-                translationX(leftDelta).translationY(topDelta);
+                .setInterpolator(interpolator)
+                .translationX(leftDelta)
+                .setListener(listener)
+                .translationY(topDelta);
         view.postDelayed(endAction, duration);
     }
 }
