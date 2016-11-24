@@ -20,12 +20,16 @@ package com.kogitune.prelollipoptransition;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.activity_transition.fragment.FragmentTransitionLauncher;
+import com.kogitune.prelollipoptransition.fragment.EndFragment;
+import com.kogitune.prelollipoptransition.fragment.SubFragment;
 import com.kogitune.prelollipoptransition.support_fragment.SupportStartFragment;
 
 
@@ -66,12 +70,32 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+        findViewById(R.id.imageView3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Fragment toFragment = new SubFragment();
+                FragmentTransitionLauncher
+                        .with(v.getContext())
+                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+                        .from(v).prepare(toFragment);
+                getSupportFragmentManager().beginTransaction().replace(R.id.parent_container, toFragment).addToBackStack(null).commit();
+            }
+        });
 
         findViewById(R.id.listViewExampleButton).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                Bundle transitionBundle = ActivityTransitionLauncher
+                        .with(MainActivity.this)
+//                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+                        .from(v)
+                        .createBundle();
+                intent.putExtras(transitionBundle);
                 startActivity(intent);
+                // you should prevent default activity tansition animation
+                overridePendingTransition(0, 0);
             }
         });
 

@@ -17,9 +17,12 @@
 
 package com.kogitune.prelollipoptransition;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,43 +30,38 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.kogitune.activity_transition.ActivityTransition;
 import com.kogitune.activity_transition.ActivityTransitionLauncher;
+import com.kogitune.activity_transition.ExitActivityTransition;
 
 public class ListViewActivity extends AppCompatActivity {
+
+    private ExitActivityTransition exitTransition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        final ListView listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return 10;
-            }
+        exitTransition = ActivityTransition
+                .with(getIntent())
+                .enterListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.d("TAG", "onEnterAnimationEnd!!");
+                    }
 
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        Log.d("TAG", "onOEnterAnimationStart!!");
+                    }
+                })
+                .to(findViewById(R.id.parent_container))
+                .start(savedInstanceState);
+    }
 
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                return getLayoutInflater().inflate(R.layout.list_row, null);
-            }
-        });
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(ListViewActivity.this, SubActivity.class);
-                ActivityTransitionLauncher.with(ListViewActivity.this).from(view.findViewById(R.id.image)).launch(intent);
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        exitTransition.exit(this);
     }
 
 }

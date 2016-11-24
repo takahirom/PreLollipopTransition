@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PreLollipopTransition.iml" filepath="$PROJECT_DIR$/PreLollipopTransition.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PreLollipopTransition.iml" filepath="$PROJECT_DIR$/PreLollipopTransition.iml" />
       <module fileurl="file://$PROJECT_DIR$/pre-lollipop-activity-transition/pre-lollipop-activity-transition.iml" filepath="$PROJECT_DIR$/pre-lollipop-activity-transition/pre-lollipop-activity-transition.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pre-lollipop-activity-transition/pre-lollipop-activity-transition.iml" filepath="$PROJECT_DIR$/pre-lollipop-activity-transition/pre-lollipop-activity-transition.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample-app/sample-app.iml" filepath="$PROJECT_DIR$/sample-app/sample-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample-app/sample-app.iml" filepath="$PROJECT_DIR$/sample-app/sample-app.iml" />
     </modules>
   </component>
