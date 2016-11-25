@@ -75,10 +75,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final Fragment toFragment = new SubFragment();
+                //init your bundle first!!
+                Bundle bundle = new Bundle();
+                bundle.putString("Test", "Test");
+                toFragment.setArguments(bundle);
+
+                //You should call this method after init your argumentsBundle.
                 FragmentTransitionLauncher
                         .with(v.getContext())
-                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
-                        .from(v).prepare(toFragment);
+                        .from(v)
+                        .prepare(toFragment);
                 getSupportFragmentManager().beginTransaction().replace(R.id.parent_container, toFragment).addToBackStack(null).commit();
             }
         });
