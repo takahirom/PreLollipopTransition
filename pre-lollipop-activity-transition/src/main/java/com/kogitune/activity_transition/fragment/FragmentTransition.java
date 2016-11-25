@@ -28,6 +28,8 @@ import android.view.animation.DecelerateInterpolator;
 import com.kogitune.activity_transition.core.MoveData;
 import com.kogitune.activity_transition.core.TransitionAnimation;
 
+import static com.kogitune.activity_transition.fragment.FragmentTransitionLauncher.TRANSITION_BUNDLE;
+
 public class FragmentTransition {
     private static TimeInterpolator interpolator;
     private Animator.AnimatorListener listener;
@@ -61,6 +63,7 @@ public class FragmentTransition {
         this.duration = duration;
         return this;
     }
+
     public FragmentTransition enterListener(Animator.AnimatorListener listener) {
         this.listener = listener;
         return this;
@@ -79,11 +82,18 @@ public class FragmentTransition {
         final Context context = toView.getContext();
         final Bundle bundle;
         if (fragment == null) {
-            bundle = supportFragment.getArguments();
+            if (supportFragment.getArguments() == null) {
+                throw new IllegalStateException("you should call FragmentTransitionLauncher.prepare() at first ");
+            }
+            bundle = supportFragment.getArguments().getBundle(TRANSITION_BUNDLE);
         } else {
-            bundle = fragment.getArguments();
+            if (fragment.getArguments() == null) {
+                throw new IllegalStateException("you should call FragmentTransitionLauncher.prepare() at first ");
+            }
+            bundle = fragment.getArguments().getBundle(TRANSITION_BUNDLE);
         }
-        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator,listener);
+
+        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator, listener);
         if (fragment == null) {
             return new ExitFragmentTransition(supportFragment, moveData);
         }
