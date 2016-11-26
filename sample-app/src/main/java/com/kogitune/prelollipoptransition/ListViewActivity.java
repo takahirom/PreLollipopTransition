@@ -42,26 +42,32 @@ public class ListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        exitTransition = ActivityTransition
-                .with(getIntent())
-                .enterListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        Log.d("TAG", "onEnterAnimationEnd!!");
-                    }
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            exitTransition = ActivityTransition
+                    .with(getIntent())
+                    .enterListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            Log.d("TAG", "onEnterAnimationEnd!!");
+                        }
 
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        Log.d("TAG", "onOEnterAnimationStart!!");
-                    }
-                })
-                .to(findViewById(R.id.parent_container))
-                .start(savedInstanceState);
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            Log.d("TAG", "onEnterAnimationStart!!");
+                        }
+                    })
+                    .to(findViewById(R.id.parent_container))
+                    .start(savedInstanceState);
+        }
+
     }
 
     @Override
     public void onBackPressed() {
-        exitTransition.exit(this);
+        if (exitTransition != null) {
+            exitTransition.exit(this);
+        }
     }
 
 }
