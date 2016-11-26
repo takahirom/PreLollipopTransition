@@ -52,7 +52,9 @@ public class FragmentTransitionLauncher {
         this.bitmap = bitmap;
         return this;
     }
-
+    /**
+     * You should call this method after init your argumentsBundle.otherwise the transitionBundle will be not work.
+     */
     public void prepare(Fragment toFragment) {
         final Bundle transitionBundle = TransitionBundleFactory.createTransitionBundle(context, fromView, bitmap);
         Bundle arguments = toFragment.getArguments();
