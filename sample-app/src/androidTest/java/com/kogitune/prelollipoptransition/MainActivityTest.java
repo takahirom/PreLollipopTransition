@@ -24,11 +24,16 @@ import android.view.KeyEvent;
 import android.widget.ImageView;
 
 import com.kogitune.activity_transition.core.TransitionAnimation;
+import com.kogitune.prelollipoptransition.fragment.SubFragment;
 import com.squareup.spoon.Spoon;
 
 import junit.framework.Assert;
 
 import org.fest.assertions.api.ANDROID;
+
+import static com.kogitune.prelollipoptransition.R.id.imageView;
+import static com.kogitune.prelollipoptransition.R.id.imageView2;
+import static com.kogitune.prelollipoptransition.R.id.imageView3;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -79,6 +84,26 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         Thread.sleep(3000l);
 
         Spoon.screenshot(getActivity(), "support_fragment_transition_backpress2");
+    }
+
+
+    public void testSubFragmentTransition() throws InterruptedException {
+
+        Spoon.screenshot(getActivity(), "init");
+        final ImageView imageView3 = (ImageView) getActivity().findViewById(R.id.imageView3);
+        instrumentation.waitForIdleSync();
+        instrumentation.runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                assertTrue(imageView3.performClick());
+            }
+        });
+        // Wait for animation
+        Thread.sleep(3000l);
+        instrumentation.waitForIdleSync();
+        Spoon.screenshot(getActivity(), "SubFragment_transition_backpress");
+        sendKeys(KeyEvent.KEYCODE_BACK);
+        Thread.sleep(2000l);
     }
 
 

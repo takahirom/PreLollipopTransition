@@ -24,6 +24,7 @@
 
 
     <FrameLayout
+        android:id="@+id/parent_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -71,6 +72,14 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="110dp"
+            android:layout_marginTop="400dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/photo" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
             android:layout_marginTop="400dp"
             android:adjustViewBounds="true"
             android:src="@drawable/photo" />

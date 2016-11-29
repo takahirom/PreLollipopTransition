@@ -19,30 +19,32 @@ package com.kogitune.prelollipoptransition.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import com.kogitune.activity_transition.fragment.ExitFragmentTransition;
 import com.kogitune.activity_transition.fragment.FragmentTransition;
 import com.kogitune.prelollipoptransition.R;
 
-public class EndFragment extends Fragment {
+
+public class SubFragment extends Fragment {
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_end, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_sub, container, false);
         final ExitFragmentTransition exitFragmentTransition
                 = FragmentTransition
                 .with(this)
                 .interpolator(new LinearOutSlowInInterpolator())
-                .to(v.findViewById(R.id.fragment_imageView))
+                .to(v.findViewById(R.id.sub_imageView))
                 .start(savedInstanceState);
         exitFragmentTransition.exitListener(new AnimatorListenerAdapter() {
             @Override
@@ -58,5 +60,4 @@ public class EndFragment extends Fragment {
         exitFragmentTransition.startExitListening();
         return v;
     }
-
 }
