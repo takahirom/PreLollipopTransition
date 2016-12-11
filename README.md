@@ -121,7 +121,7 @@ getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToB
 
 ## Contributors
 * [shiraji](http://www.github.com/shiraji)
-
+* [lovejjfg](https://github.com/lovejjfg)
 
 ## Thanks
 Sample Photo
