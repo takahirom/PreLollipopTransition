@@ -40,7 +40,7 @@ public class TransitionBundleFactory {
         // Bitmap is Optional
         String imageFilePath = null;
         if (bitmap != null) {
-            TransitionAnimation.bitmapCache = new WeakReference<Bitmap>(bitmap);
+            TransitionAnimation.bitmapCache = new WeakReference<>(bitmap);
             imageFilePath = saveImage(context, bitmap);
         }
         int[] screenLocation = new int[2];

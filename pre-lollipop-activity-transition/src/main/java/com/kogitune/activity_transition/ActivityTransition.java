@@ -19,7 +19,6 @@ package com.kogitune.activity_transition;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +32,7 @@ public class ActivityTransition {
     private View toView;
     private TimeInterpolator interpolator;
     private Animator.AnimatorListener listener;
-    private Intent fromIntent;
+    private final Intent fromIntent;
 
     private ActivityTransition(Intent intent) {
         this.fromIntent = intent;
@@ -66,9 +65,9 @@ public class ActivityTransition {
         if (interpolator == null) {
             interpolator = new DecelerateInterpolator();
         }
-        final Context context = toView.getContext();
+
         final Bundle bundle = fromIntent.getExtras();
-        final MoveData moveData = TransitionAnimation.startAnimation(context, toView, bundle, savedInstanceState, duration, interpolator, listener);
+        final MoveData moveData = TransitionAnimation.startAnimation(toView, bundle, savedInstanceState, duration, interpolator, listener);
         return new ExitActivityTransition(moveData);
     }
 
