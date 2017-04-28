@@ -29,12 +29,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "21.1.2"
+    compileSdkVersion rootProject.ext.CompileSdk
+    buildToolsVersion rootProject.ext.BuildTools
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 21
+        minSdkVersion rootProject.ext.MinSdk
+        targetSdkVersion rootProject.ext.TargetSdk
         versionCode 1
         versionName "1.0"
     }
@@ -78,7 +78,7 @@ bintray {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:support-v4:24.+'
+    provided "com.android.support:support-v4:$rootProject.ext.SupportLibrary"
 }
 
 task sourcesJar(type: Jar) {

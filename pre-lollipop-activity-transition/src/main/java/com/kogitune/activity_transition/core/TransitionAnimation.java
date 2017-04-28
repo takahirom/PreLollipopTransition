@@ -19,13 +19,13 @@ package com.kogitune.activity_transition.core;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -39,11 +39,17 @@ public class TransitionAnimation {
     public static WeakReference<Bitmap> bitmapCache;
     public static boolean isImageFileReady = false;
 
-    public static MoveData startAnimation(Context context, final View toView, Bundle transitionBundle, Bundle savedInstanceState, final int duration, final TimeInterpolator interpolator, final Animator.AnimatorListener listener) {
+    public static MoveData startAnimation(final View toView, Bundle transitionBundle, Bundle savedInstanceState, final int duration, final TimeInterpolator interpolator, final Animator.AnimatorListener listener) {
+        Context context = toView.getContext();
+        if (context instanceof ContextThemeWrapper) {
+            context = ((ContextThemeWrapper) context).getBaseContext();
+        }
+
         final TransitionData transitionData = new TransitionData(context, transitionBundle);
         if (transitionData.imageFilePath != null) {
             setImageToView(toView, transitionData.imageFilePath);
         }
+
         final MoveData moveData = new MoveData();
         moveData.toView = toView;
         moveData.duration = duration;
@@ -115,11 +121,7 @@ public class TransitionAnimation {
             final ImageView toImageView = (ImageView) toView;
             toImageView.setImageBitmap(bitmap);
         } else {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-                toView.setBackground(new BitmapDrawable(toView.getResources(), bitmap));
-            } else {
-                toView.setBackgroundDrawable(new BitmapDrawable(toView.getResources(), bitmap));
-            }
+            ViewCompat.setBackground(toView, new BitmapDrawable(toView.getResources(), bitmap));
         }
     }
 
