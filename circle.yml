@@ -34,3 +34,4 @@ test:
     # - adb uninstall com.kogitune.prelollipoptransition
     # run tests against the emulator using spoon.
     - ./gradlew spoonDebugAndroidTest --stop -PdisablePreDex
+    - ./gradlew spoonDebugAndroidTest -PdisablePreDex
